@@ -105,7 +105,6 @@ def fa_confirm(request):
 
 @csrf_exempt
 def logout(request, id):
-    print("-------------------------------Logging something to the console")
     if request.method == 'POST':
         try:
             data = json.loads(request.body)
