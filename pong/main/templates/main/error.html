@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>404 Page Not Found</title>
+    <link rel="icon" href="./public/new_icon.png" type="image/x-icon">
+    <link rel="stylesheet" href="./error.css"/>
+</head>
+<body>
+    <div class="error-container">
+        <div class="error-code">404</div>
+        <div class="error-face">😕</div>
+        <div class="error-message" id="errorMsg">ERROR</div>
+        <div class="error-description" id="sorry">SORRY! PAGE NOT FOUND</div>
+    </div>
+<script>
+    function applyLanguage() {
+        var selectedLanguage = localStorage.getItem('selectedLanguage') || 'en';
+        const translations = {
+            "en": {
+                "errorMsg":"ERROR",
+                "sorry":"SORRY! PAGE NOT FOUND"
+            },
+            "hy": {
+                "errorMsg":"ՍԽԱԼ",
+                "sorry":"ՆԵՐՈՂՈՒԹՅՈՒՆ! ԷՋԸ ՉԻ ԳՏՆՎԵԼ"
+            },
+            "ru": {
+                "errorMsg":"ОШИБКА",
+                "sorry":"ИЗВИНИ! СТРАНИЦА НЕ НАЙДЕНА"
+            },
+            "cn": {
+                "errorMsg":"錯誤",
+                "sorry":"對不起！ 找不到網頁"
+            }
+        };
+        document.getElementById('errorMsg').textContent = translations[selectedLanguage].errorMsg;
+        document.getElementById('sorry').textContent = translations[selectedLanguage].sorry;
+    };
+    document.addEventListener('DOMContentLoaded', applyLanguage);
+</script>
+</body>
+</html>

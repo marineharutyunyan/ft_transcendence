@@ -1,0 +1,66 @@
+{% load static %}
+<!DOCTYPE html>
+    <html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Tournaments - Pong Game</title>
+        <link rel="icon" href="{% static 'images/new_icon.png' %}" type="image/x-icon">
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap"/>
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+        <link rel="stylesheet" href="{% static './tournaments.css' %}"/>    
+    </head>
+    <body>
+        <div class="navbar">
+            <a href="/home" id="homeId">
+                <img alt="HOME" src="{% static '/images/icons8-home-20.png' %}" /> <span id="homeheader">HOME</span>
+            </a>
+            <a href="/profile" id="profileId">
+                <img alt="PROFILE" src="{% static '/images/icons8-customer-20.png' %}" /> <span id="profile">PROFILE</span>
+            </a>
+            <img class="profile-icon" alt="Profile Picture" id="profileImage" src="" />
+            <div class="menu" id="menu">
+                <a href="settings/" class="settings" id="settingsId">SETTINGS</a>
+                <a href="/" class="logout" id="logoutId">LOG OUT</a>
+            </div>
+        </div>
+            <div class="container">
+                <h1 class="header" id="tourn">Tournaments</h1>
+                <div class="tournaments-list-container">
+                    <div class="tabs">
+                        <button class="tab-button " onclick="openTab(event, 'Users')" id="user">Users</button>
+                        <button class="tab-button" onclick="openTab(event, 'Requests')" id="resuest">Requests</button>
+                        <button class="tab-button" onclick="openTab(event, 'Tournament')" id="tournament">Tournament</button>
+                    </div>
+                    <div id="Users" class="tab-content"> </div>
+                    <div id="Requests" class="tab-content"> </div> 
+                    <div id="Tournament" class="tab-content">
+                        <div class="tournament-join">
+                            <button class="join-tournament-button" onclick="showJoinForm()">Join Tournament</button>
+                            <div class="tournament-users">
+                                <h2 id="h2Header">Joined Users:</h2>
+                                <div id="tournamentUserList">
+                                    <!-- Joined users will be added here -->
+                                </div>
+                            </div>
+                        </div>
+                        <button class="start-tournament-button" id="newTournamentButton" style="display: none;" onclick="startNewTournament()" id="start">Start New Tournament</button>
+                    </div>
+                </div>
+            </div>          
+            <!--for username and password-->
+            <div id="joinFormModal" class="modal">
+                <div class="modal-content">
+                    <span class="close" onclick="closeModal()">&times;</span>
+                    <h2>Join Tournament</h2>
+                    <!-- <form autocomplete="off" action="" name="IntraLogin" id="forIntra" > -->
+                    <input type="text" id="usernameInput" placeholder="Username" required>
+                    <input type="password" id="passwordInput" placeholder="Password" required>
+                    <button onclick="joinTournament()" class="submit-info">Submit</button>
+                <!-- </form> -->
+                </div>
+            </div>
+        <script src="{% static './tournaments.js' %}"></script>
+    </body>
+</html> 

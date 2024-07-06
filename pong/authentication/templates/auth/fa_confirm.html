@@ -1,0 +1,38 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Confirmation - Pong Game</title>
+    <link rel="icon" href="{% static 'images/new_icon.png' %}" type="image/x-icon">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap"/>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+    <link rel="stylesheet" href="{% static 'fa_confirm.css' %}"/>
+</head>
+<body>
+    <div class="container">
+        <h1 class="header" id="confirmEmail">Confirm your Email</h1>
+        <p class="text"  id="enterConfirm">Please enter the confirmation code sent to your email:</p>
+        <form autocomplete="off" action="" name="Confirm Email" id="forSubmit">
+            <div class="confirmation-code">
+                <input type="text" maxlength="1" id="digit1" onkeyup="moveFocus('digit1', 'digit2')" />
+                <input type="text" maxlength="1" id="digit2" onkeyup="moveFocus('digit2', 'digit3')" />
+                <input type="text" maxlength="1" id="digit3" onkeyup="moveFocus('digit3', 'digit4')" />
+                <input type="text" maxlength="1" id="digit4" onkeyup="moveFocus('digit4', 'digit5')" />
+                <input type="text" maxlength="1" id="digit5" onkeyup="moveFocus('digit5', null)" />
+            </div>
+            <div class="buttons">
+                <button type="button" onclick="confirmCode()" class="button" id="confirmButton">Confirm</button>
+                <p id="message" class="message"></p>
+                <div class="loading">
+                    <img src="{% static './images/loading-loading-forever.gif' %}" alt="Loading..." />
+                </div>
+            </div>
+        </form>
+    </div>
+    <script src="{% static 'fa_confirm.js' %}"></script>
+</body>
+</html>

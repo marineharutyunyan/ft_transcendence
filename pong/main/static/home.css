@@ -1,0 +1,241 @@
+body {
+    margin: 0;
+    padding: 0;
+    font-family: Arial, sans-serif;
+    background: linear-gradient(
+        rgba(196, 196, 196, 0.38),
+        rgba(196, 196, 196, 0.38)
+    ),
+    radial-gradient(
+        50% 50%at 50% 50%,
+        #1e6a45,
+        rgba(68, 118, 103, 0.04),
+        rgba(1, 10, 7, 0.88) 0.01%,
+        #7fd883 0.02%,
+        #053527 0.03%,
+        #549158 0.04%,
+        #17523b,
+        #124a35
+    );
+    color: #fff;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    position: relative;
+    overflow-x: hidden; /* Prevent horizontal scrolling */
+}
+
+.navbar {
+    position: absolute;
+    top: 0;
+    left: 15px; /* Changed to 0 */
+    right: 0; /* Added */
+    margin: 0 auto; /* Center the navbar */
+    display: flex;
+    align-items: center;
+    z-index: 1000;
+}
+
+.navbar a {
+    text-decoration: none;
+    color: #fff;
+    margin: 0 5px;
+    margin-top: 20px;
+    position: relative;
+    font-size: 1.5em;
+    transition: color 0.3s;
+}
+
+.navbar a::before {
+    content: "";
+    position: absolute;
+    top: 50%;
+    right: -5px; /* Adjust the distance from the text */
+    transform: translateY(-50%);
+    height: 70%; /* Adjust the height of the line */
+    width: 1px;
+}
+
+.navbar a:hover {
+    color: rgb(6, 225, 225);
+    transform: scale(1.1);
+	filter: brightness(100%);
+	transition: 0.5s;
+}
+
+.profile-icon {
+    width: 65px;
+    height: 65px;
+    right: 60px;
+    background-color: #07382a;
+    border-radius: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-left: auto; /* Align to the right */
+    margin-right: 20px; /* Added margin for spacing */
+    margin-top: 30px;
+    position: relative;
+    cursor: pointer;
+}
+
+.profile-icon:hover .menu {
+    display: block;
+}
+
+.menu {
+    display: none;
+    position: absolute;
+    top: 95px;
+    right: 30px;
+    background-color:rgba(255, 255, 255, 0.2);
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    z-index: 100;
+    min-width: 170px;
+    height: 70px;
+    letter-spacing: 1.7px;
+    line-height: 25px;
+    text-transform: uppercase;
+    align-items: center;
+    text-align: center;
+    border-radius: 25px;
+    border: 2px solid white;
+}
+
+.menu a {
+    display: block;
+    text-decoration: none;
+    color: black;
+    padding: 5px 10px;
+    transition: background-color 0.3s;
+    margin-top: 0;
+    text-align: center;
+    font-size: medium;
+    border-radius: 25px;
+}
+
+.menu a:hover {
+    background-color: rgba(205, 213, 204, 0.788);
+    border-radius: 25px;
+    transform: scale(1.0);
+}
+
+.menu a.settings:hover {
+    color: #053527; 
+}
+
+.menu a.logout:hover {
+    color: #960000;
+}
+
+.container {
+    display: flex;
+    align-items: center;
+    max-width: 1600px;
+    width: 100%;
+    padding: 100px;
+    background: rgba(68, 118, 103, 0.04);
+    border-radius: 10px;
+    flex-wrap: wrap-reverse;
+}
+
+.image-container {
+    flex: 0 0 50%;
+    margin-right: 45px;
+    position: relative;
+    overflow: hidden;
+    border-radius: 20px;
+    transition: transform 3s;
+    transition: filter 0.5s;
+}
+
+.image-container img {
+    width: 100%;
+    display: block;
+    transition: transform 0.5s;
+    max-width: 100%;
+    height: auto;
+    max-height: 500px;
+}
+
+.image-container:hover img {
+    transform: scale(1.1);
+    filter: brightness(70%);
+    transition: 0.5s;
+}
+
+.content {
+    flex: 1;
+    text-align: center;
+    font-kerning: auto;
+    margin-top: 25px;
+    width: 100%;
+}
+
+.header {
+    font-size: 4em;
+    margin-bottom: 20px;
+}
+
+.text {
+    font-size: 1.6em;
+    line-height: 1.5;
+    margin-bottom: 40px;
+    text-transform: uppercase;
+    text-align: justify;
+}
+
+.buttons {
+    display: flex;
+    justify-content: center;
+    margin-top: 40px;
+}
+
+.buttons a {
+    text-decoration: none;
+}
+
+.button {
+    padding: 15px 40px;
+    font-size: 1.7em;
+    background-color: #07382a;
+    color: aliceblue;
+    text-decoration: none;
+    border-radius: 50px;
+    margin: 0 25px;
+    transition: background-color 0.3s;
+    width: 250px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+    border: 2px solid white;
+    box-sizing: border-box;
+    margin-top: 10px;
+}
+
+.button:hover {
+    background-color: #397262;
+}
+
+@media (max-width: 1000px) {
+        .container {
+            flex-direction: column;
+        }
+        .image-container {
+            margin-right: 0;
+            margin-bottom: 20px;
+            width: 100%;
+        }
+        .content {
+            text-align: center;
+        }
+        .buttons {
+            flex-direction: column;
+        }
+        .button {
+            width: 100%;
+            margin: 10px 0;
+        }
+}

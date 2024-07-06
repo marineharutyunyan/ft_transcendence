@@ -1,0 +1,62 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pong Game</title>
+    <link rel="icon" href="{% static 'images/new_icon.png' %}" type="image/x-icon">
+    <link rel="stylesheet" href="{% static 'index.css' %}" />  
+</head>
+<body>
+    <div class="navbar">
+        <div class="image-wrapper" id="imageWrapper">
+            <img src="{% static 'images/icons8-home-20.png' %}" alt="Button Image" width=30 high=30>
+        </div>
+        <div class="dropdown-content" id="dropdownContent">
+            <select name="language" id="languageSelect">
+                <option value="en">English</option>
+                <option value="hy">Armenian</option>
+                <option value="ru">Russian</option>
+                <option value="cn">Chinese</option>
+            </select>
+        </div>
+    </div>
+    <div class="container">
+        <div class="image-container">
+            <img src="{% static 'images/section@2x.png' %}" alt="Pong Game Image">
+        </div>
+        <div class="content">
+            <h1 class="header" id="header">Welcome to Pong Game! Let's Play and Connect!</h1>
+            <p class="text" id="text">Play the classic Pong game, chat with friends, and compete in real-time matches.</p>
+            <div class="buttons">
+                <a href="/signin">
+                    <div class="button" id="buttonSignIn">Sign In</div>
+                </a>
+                <span class="or" id="or">OR</span>
+                <a href="/signup">
+                    <div class="button" id="buttonSignUp">Sign Up</div>
+                </a>
+            </div>
+        </div>
+    </div>
+    <!-- <script>
+        const routes = {
+            "/": "{% url 'index' %}",
+            "/home": "{% url 'home' %}",
+            "/signin": "{% url 'signin' %}",
+            "/signup": "{% url 'signup' %}",
+            "/confirm": "{% url 'confirm' %}",
+            "/fa_confirm": "{% url 'fa_confirm' %}",
+            "/intra": "{% url 'intra' %}",
+            "/profile": "{% url 'profile' %}",
+            "/local_game": "{% url 'local_game' %}",
+            "/match_history": "{% url 'match_history' %}",
+            "/tournaments": "{% url 'tournaments' %}",
+            "/settings": "{% url 'settings' %}",
+        };
+    </script> -->
+    <script src="{% static './index.js' %}"></script>
+</body>
+</html>

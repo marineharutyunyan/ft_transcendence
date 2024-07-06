@@ -1,0 +1,32 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>42Intra - Pong Game</title>
+    <link rel="icon" href="{% static 'images/new_icon.png' %}" type="image/x-icon">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap"/>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+    <link rel="stylesheet" href="{% static 'intra.css' %}"/>  
+</head>
+<body>
+    <div class="container">
+        <h1 class="header" id="continue">Continue with 42Intra</h1>
+        <p class="text" id="text">Your 42Intra username</p>
+        <form autocomplete="off" action="" name="42Log in" id="for42Submit">
+        <div class="input-group">
+            <input type="text" id="username" name="username" placeholder="Username">
+        </div>
+        <div class="buttons">
+            <input type="submit" name="submit1" id="contButton" value="Continue" class="button">
+        </div>
+    </form>
+    </div>
+    <script src="{% static 'intra.js' %}"></script>
+</body>
+</html>
+
+
+

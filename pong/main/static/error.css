@@ -1,0 +1,53 @@
+body {
+    margin: 0;
+    padding: 0;
+    font-family: Arial, sans-serif;
+    background: linear-gradient(
+        rgba(196, 196, 196, 0.38),
+        rgba(196, 196, 196, 0.38)
+    ),
+        radial-gradient(
+            50% 50%at 50% 50%,
+            #1e6a45,
+            rgba(68, 118, 103, 0.04),
+            rgba(1, 10, 7, 0.88) 0.01%,
+            #7fd883 0.02%,
+            #053527 0.03%,
+            #549158 0.04%,
+            #17523b,
+            #124a35
+        );
+    color: #fff;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    position: relative;
+    overflow-x: hidden; 
+}
+
+.error-container {
+    text-align: center;
+    color: #fff;
+    position: relative;
+}
+
+.error-code {
+    font-size: 250px;
+    font-weight: bold;
+}
+
+.error-face {
+    font-size: 90px;
+    margin-top: -100px;
+    margin-bottom: 50px;
+}
+
+.error-message {
+    font-size: 70px;
+    font-weight: bold;
+}
+
+.error-description {
+    font-size: 30px;
+}

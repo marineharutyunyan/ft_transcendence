@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Ping Pong Game</title>
+    {% load static %}
+    <style>
+        body, html {
+            margin: 0;
+            padding: 0;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            background: linear-gradient(45deg, #1e3c72, #2a5298);
+            font-family: 'Arial', sans-serif;
+        }
+
+        #game {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            background: rgba(68, 118, 103, 0.04);
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+            border-radius: 10px;
+            padding: 10px;
+        }
+
+        #pongCanvas {
+            background: #000;
+            border: 2px solid #fff;
+            border-radius: 5px;
+        }
+
+        button {
+            margin-top: 20px;
+            padding: 12px 24px;
+            font-size: 18px;
+            font-weight: bold;
+            color: #fff;
+            background: linear-gradient(45deg, #ff6f61, #ff9472);
+            border: none;
+            border-radius: 25px;
+            cursor: pointer;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            transition: background 0.3s, box-shadow 0.3s;
+        }
+
+        button:hover {
+            background: linear-gradient(45deg, #ff9472, #ff6f61);
+            box-shadow: 0 6px 8px rgba(0, 0, 0, 0.2);
+        }
+
+        button:focus {
+            outline: none;
+        }
+
+        #restartButton {
+            display: none;
+        }
+    </style>
+</head>
+<body>
+    <div id="game">
+        <canvas id="pongCanvas" width="800" height="450"></canvas>
+        <button id="restartButton">Restart</button>
+        <button id="exitButton">Exit</button>
+    </div>
+    <script src="{% static 'game/local_game.js' %}"></script>
+</body>
+</html>
