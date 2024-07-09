@@ -45,7 +45,7 @@ function confirmCode()
             email: email,
             password: password,
         };
-        
+        debugger;
         fetch('http://10.12.11.2:8000/confirm/', {
             method: 'POST',
             headers:

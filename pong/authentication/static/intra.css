@@ -1,22 +1,8 @@
 body {
     margin: 0;
     padding: 0;
-    font-family: Arial, sans-serif;
-    background: linear-gradient(
-  rgba(196, 196, 196, 0.38),
-  rgba(196, 196, 196, 0.38)
-    ),
-radial-gradient(
-    50% 50%at 50% 50%,
-    #1e6a45,
-    rgba(68, 118, 103, 0.04),
-    rgba(1, 10, 7, 0.88) 0.01%,
-    #7fd883 0.02%,
-    #053527 0.03%,
-    #549158 0.04%,
-    #17523b,
-    #124a35
-);
+    font-family: 'Poppins', sans-serif;
+    background: linear-gradient(to right, #283048, #859398);
     color: #fff;
     display: flex;
     justify-content: center;
@@ -25,71 +11,68 @@ radial-gradient(
 }
 
 .container {
-    max-width: 530px;
-    height: 530px;
-    width: 100%;
+    max-width: 400px;
     padding: 40px;
-    background: rgba(58, 75, 70, 0.5);
-    border-radius: 25px;
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    background: rgba(255, 255, 255, 0.1);
+    border-radius: 10px;
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.3);
+}
+
+.content {
     text-align: center;
 }
 
 .header {
-    font-size: 3.3em;
+    font-size: 2.5em;
     margin-bottom: 20px;
 }
 
 .text {
-    font-size: 1.7em;
-    margin-bottom: 55px;
-    color:#bfbfbf;
-    font-weight: bolder;
+    font-size: 1.2em;
+    margin-bottom: 30px;
+    color: #bfbfbf;
 }
 
+/* Input group styles */
 .input-group {
-    margin-bottom: 35px;
-    text-align: left;
-    display: flex;
+    margin-bottom: 20px;
 }
 
 .input-group input {
-    width: 100%;
-    padding: 10px;
-    font-size: 22px;
-    border-radius: 8px;
+    width: 93%;
+    padding: 12px;
+    font-size: 16px;
+    border-radius: 5px;     
     border: 1px solid #ccc;
-    background-color: rgb(22, 22, 22);
-    cursor: pointer;
-    font-weight: 500;
-    color: white;
-    padding: 19px;
-    padding-right: 0%;
-    align-items: center;
+    background-color: #fff;
+    color: #333;
+    transition: border-color 0.3s;
 }
 
-.buttons a {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    text-decoration: none;
+.input-group input:focus {
+    outline: none;
+    border-color: #fb8c42; /* Orange border color on focus */
 }
 
-.button{
-    padding: 14px 20px;
-    font-size: 25px;
+/* Buttons styles */
+.buttons {
+    text-align: center;
+}
+
+.button {
+    padding: 12px 20px;
+    font-size: 16px;
     font-weight: bold;
-    background-color: #fb8c42; 
+    background-color: #fb8c42; /* Orange button background */
     color: #fff;
-    text-decoration: none;
-    border-radius: 8px;
-    margin: 25px 0;
-    margin-bottom:auto;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
     transition: background-color 0.3s;
     width: 100%;
-    cursor: pointer;  
+    margin: 0 auto;
 }
 
 .button:hover {
-    background-color: #db7939;
+    background-color: #e7843a; /* Darker orange on hover */
 }
