@@ -19,7 +19,7 @@ function confirmCode()
     {
         code += document.getElementById("digit" + i).value;
     }
-    var confirmation_code = localStorage.getItem("confirmation_code");
+    var confirmation_code = localStorage.getItem("confirmation_code_fa");
 
     if (code === confirmation_code)
     {

@@ -16,6 +16,7 @@ const routes = {
 	"/intra": "{% url 'intra' %}",
 	"/profile": "{% url 'profile' %}",
 	"/local_game": "{% url 'local_game' %}",
+	"/local_tournament": "{% url 'local_tournament' %}",
 	"/match_history": "{% url 'match_history' %}",
 	"/tournaments": "{% url 'tournaments' %}",
 	"/settings": "{% url 'settings' %}",

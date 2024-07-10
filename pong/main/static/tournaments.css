@@ -1,22 +1,8 @@
 body {
     margin: 0;
     padding: 0;
-    font-family: Arial, sans-serif;
-    background: linear-gradient(
-        rgba(196, 196, 196, 0.38),
-        rgba(196, 196, 196, 0.38)
-    ),
-        radial-gradient(
-            50% 50%at 50% 50%,
-            #1e6a45,
-            rgba(68, 118, 103, 0.04),
-            rgba(1, 10, 7, 0.88) 0.01%,
-            #7fd883 0.02%,
-            #053527 0.03%,
-            #549158 0.04%,
-            #17523b,
-            #124a35
-        );
+    font-family: 'Poppins', sans-serif;
+    background: linear-gradient(to right, #283048, #859398);
     color: #fff;
     display: flex;
     justify-content: center;
@@ -173,7 +159,7 @@ body {
 }
 
 .tab-button.active {
-    background-color: #1e6a45;
+    background-color: #fb8c42;
 }
 
 .tab-content {
@@ -229,7 +215,7 @@ body {
 
 .accept-button, .invite-button {
     padding: 5px 10px;
-    background-color: #1e6a45;
+    background-color: #fb8c42;;
     border: none;
     border-radius: 5px;
     color: white;
@@ -266,7 +252,7 @@ body {
 
 .join-tournament-button, .start-tournament-button {
     padding: 10px 20px;
-    background-color: #1e6a45;
+    background-color: #fb8c42;
     color: white;
     border: none;
     border-radius: 8px;

@@ -12,4 +12,5 @@ urlpatterns = [
 	path('api/v1/ignore/<int:id>/', views.ignore, name='ignore'),
 
 	path('local_game/', views.local_game, name='local_game'),
+	path('local_tournament/', views.local_tournament, name='local_tournament'),
 ]

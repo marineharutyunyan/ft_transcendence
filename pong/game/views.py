@@ -113,3 +113,6 @@ def get_history(request, id):
 
 def local_game(request):
 	return render(request, 'local_game.html')
+
+def local_tournament(request):
+	return render(request, 'local_tournament.html')

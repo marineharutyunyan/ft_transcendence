@@ -1,317 +1,113 @@
+/* Global styles */
 body {
     margin: 0;
     padding: 0;
-    font-family: Arial, sans-serif;
-    background: linear-gradient(
-        rgba(196, 196, 196, 0.38),
-        rgba(196, 196, 196, 0.38)
-    ),
-        radial-gradient(
-            50% 50%at 50% 50%,
-            #1e6a45,
-            rgba(68, 118, 103, 0.04),
-            rgba(1, 10, 7, 0.88) 0.01%,
-            #7fd883 0.02%,
-            #053527 0.03%,
-            #549158 0.04%,
-            #17523b,
-            #124a35
-        );
+    font-family: 'Poppins', sans-serif;
+    background: #283048;
     color: #fff;
     display: flex;
     justify-content: center;
     align-items: center;
     min-height: 100vh;
-    position: relative;
-    overflow-x: hidden; /* Prevent horizontal scrolling */
 }
 
-.navbar {
-    position: absolute;
-    top: 0;
-    left: 15px; /* Changed to 0 */
-    right: 0; /* Added */
-    margin: 0 auto; /* Center the navbar */
-    display: flex;
-    align-items: center;
-    z-index: 1000;
-}
-  
-.navbar a {
-    text-decoration: none;
-    color: #fff;
-    margin: 0 5px;
-    margin-top: 20px;
-    position: relative;
-    font-size: 1.5em;
-    transition: color 0.3s;
-}
-
-.navbar a::before {
-    content: "";
-    position: absolute;
-    top: 50%;
-    right: -5px; /* Adjust the distance from the text */
-    transform: translateY(-50%);
-    height: 70%; /* Adjust the height of the line */
-    width: 1px;
-}
-
-.navbar a:hover {
-    color: rgb(6, 225, 225);
-    transform: scale(1.1);
-    filter: brightness(100%);
-    transition: 0.5s;
-}
-  
-.profile-icon {
-    width: 65px;
-    height: 65px;
-    right: 60px;
-    background-color: #07382a;
-    border-radius: 50%;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    margin-left: auto; /* Align to the right */
-    margin-right: 20px; /* Added margin for spacing */
-    margin-top: 30px;
-    position: relative;
-    cursor: pointer;
-}
-
-.profile-icon:hover .menu {
-    display: block;
-}
-
-.menu {
-    display: none;
-    position: absolute;
-    top: 95px;
-    right: 30px;
-    background-color:rgba(255, 255, 255, 0.2);
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-    z-index: 100;
-    min-width: 170px;
-    height: 70px;
-    letter-spacing: 1.7px;
-    line-height: 25px;
-    text-transform: uppercase;
-    align-items: center;
-    text-align: center;
-    border-radius: 25px;
-    border: 2px solid white;
-}
-  
-.menu a {
-    display: block;
-    text-decoration: none;
-    color: black;
-    padding: 5px 10px;
-    transition: background-color 0.3s;
-    margin-top: 0;
-    text-align: center;
-    font-size: medium;
-    border-radius: 25px;
-}
-  
-.menu a:hover {
-    background-color: rgba(205, 213, 204, 0.788);
-    border-radius: 25px;
-    transform: scale(1.0);
-}
-  
-.menu a.settings:hover {
-    color: #053527; 
-}
-  
-.menu a.logout:hover {
-    color: #960000;
-}
-  
 .container {
-    max-width: 530px;
-    height: 750px;
-    width: 100%;
+    max-width: 800px;
     padding: 40px;
-    background: rgba(58, 75, 70, 0.5);
-    border-radius: 25px;
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-    text-align: center;
+    background: rgba(255, 255, 255, 0.1);
+    border-radius: 10px;
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.3);
+    margin-top: 20px;
 }
 
 .header {
-    font-size: 2.7em;
+    font-size: 2.5em;
     margin-bottom: 20px;
-    margin-top: 100px;
     text-align: center;
-    letter-spacing: 3px;
-}
-  
-.profile-icon-large {
-    width: 115px;
-    height: 115px;
-    border-radius: 50%;
-    margin-bottom: 20px;
-    margin-right: 350px;
 }
 
-.edit-profile-icon {
-    cursor: pointer;
-    padding-right: 20px;
+.text {
+    font-size: 1.2em;
+    margin-bottom: 30px;
+    color: #bfbfbf;
+    text-align: center;
 }
-  
-.remove-profile-icon {
-    cursor: pointer;
+
+.profile-icon-large {
+    width: 100px;
+    height: 100px;
+    border-radius: 50%;
+    margin: 0 auto 20px;
+    display: block;
 }
-  
+
 .profile-icon-change {
-    margin-right: 350px;
-    margin-top: -10px;
-    padding-bottom: 15px;
+    text-align: center;
+    margin-bottom: 20px;
 }
 
 .edit-line {
     display: flex;
-    align-items:center;
-    justify-content:start;
-    margin:40px 0;
+    align-items: center;
+    margin-bottom: 15px;
 }
-                   
-.edit-icon {
-    margin-right: 10px;
-    cursor: pointer;
-}
-                   
+
 .edit-description {
-    font-size: 1.5em;
-    margin-top: 5px;
-}
-                   
-.action-buttons {
-    position: relative;
-    display: flex;
-    justify-content: center;
-    margin-top: 40px;
-    padding: 15px 40px;
-    font-size: 2em;
-}
-
-.delete-account {
-    background-color: #960000;
-    color: aliceblue;
-    border-radius: 50px;
-    margin: 0 25px;
-    transition: background-color 0.3s;
-    min-width: 230px;
-    min-height: 50px;
-    font-size: 0.7em;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    cursor: pointer;
-    border: 2px solid white;
-    box-sizing: border-box;
-    margin-top: -10px;
-}
-  
-.delete-account:hover {
-    background-color: #740e0e;
-}
-                   
-.save-changes {
-    background-color: #1e6a45;
-    color: aliceblue;
+    flex: 1;
     margin-left: 10px;
-    border-radius: 50px;
-    margin: 0 25px;
-    transition: background-color 0.3s;
-    min-width: 230px;
-    min-height: 50px;
-    font-size: 0.7em;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    cursor: pointer;
-    border: 2px solid white;
-    box-sizing: border-box;
-    margin-top: -10px;
-}
-  
-.save-changes:hover {
-    background-color: #164b31;
-}
-
-.username {
-    font-size: 1.5em;
     font-weight: bold;
-    text-align: center;
-    margin-top: -50px; /* Adjust the margin-top to position it under the profile picture */
-    margin-left: auto; /* Align to the right */
-    margin-right: 20px; /* Added margin for spacing */
 }
 
-.edit-line input{
-    /* width: auto; */
-    padding: 5px;
-    font-size: 1.3em;
-    border-radius: 8px;
-    border: 1px solid #ccc;
-    background-color: rgb(22, 22, 22);
+.edit-icon {
+    width: 20px;
     cursor: pointer;
-    font-weight: 500;
-    color: white;
-    padding-right: 0%;
-    align-items: center;
+    margin-right: 10px;
 }
 
 .password-input-container {
     position: relative;
-    display: inline-block;
 }
 
 .password-input-container input {
-    /* width: auto; */
-    padding: 5px;
-    font-size: 1.3em;
-    border-radius: 8px;
+    padding: 12px;
+    font-size: 16px;
+    border-radius: 5px;
     border: 1px solid #ccc;
-    background-color: rgb(22, 22, 22);
-    cursor: pointer;
-    font-weight: 500;
-    color: white;
-    padding-right: 0%;
-    align-items: center;
+    background-color: #fff;
+    color: #333;
+    transition: border-color 0.3s;
 }
 
-.password-input-container .toggle-password {
+input {
+    padding: 12px;
+    font-size: 16px;
+    border-radius: 5px;
+    border: 1px solid #ccc;
+    background-color: #fff;
+    color: #333;
+    transition: border-color 0.3s;
+}
+
+.toggle-password {
     position: absolute;
     top: 50%;
-    right: 8px;
+    right: 10px;
     transform: translateY(-50%);
     cursor: pointer;
+    color: #666;
+    font-size: 1.3em;
 }
-
-/*For toggle switch*/
 
 .toggle-container {
     display: flex;
     align-items: center;
-    background-color: #fff;
-    padding: 2px 7px;
-    border-radius: 20px;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
-    width: 195px;
-    margin-left: 10px;
-    top: 15px;
+    margin-bottom: 20px;
 }
 
 .toggle-description {
-    margin-right: 50px;
-    font-size: 18px;
-    color: #1e6a45;
-    font-weight: bold;
-    margin-left: 40px;
+    font-size: 16px;
+    margin-right: 10px;
+    flex: 1; /* Ensures the text takes available space */
 }
 
 .toggle-switch {
@@ -319,6 +115,10 @@ body {
     display: inline-block;
     width: 60px;
     height: 34px;
+    border-radius: 17px;
+    background-color: #ccc;
+    transition: background-color 0.3s;
+    margin-left: auto; /* Adjusted margin for better alignment */
 }
 
 .toggle-switch input {
@@ -327,69 +127,117 @@ body {
     height: 0;
 }
 
-.slider {
+.toggle-switch .slider {
     position: absolute;
     cursor: pointer;
     top: 0;
     left: 0;
     right: 0;
     bottom: 0;
-    background-color: #ccc;
-    transition: 0.4s;
-    border-radius: 34px;
-    box-shadow: inset 0 0 5px rgba(0, 0, 0, 0.2);
+    background-color: #fff;
+    transition: transform 0.3s, background-color 0.3s;
+    border-radius: 17px;
 }
 
-.slider:before {
+.toggle-switch input:checked + .slider {
+    background-color: #fb8c42; /* Orange background when toggled */
+}
+
+.toggle-switch .slider:before {
     position: absolute;
     content: "";
     height: 26px;
     width: 26px;
+    border-radius: 50%;
     left: 4px;
     bottom: 4px;
-    background-color: white;
-    transition: 0.4s;
-    border-radius: 50%;
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+    background-color: #ccc; /* Default background color for toggle */
+    transition: transform 0.3s;
 }
 
-input:checked + .slider {
-    background-color: #1e6a45;
-}
-
-input:checked + .slider:before {
+.toggle-switch input:checked + .slider:before {
     transform: translateX(26px);
+    background-color: #fff; /* Adjusted color for better visibility */
 }
 
-@media only screen and (max-width: 600px) {
-    /* Adjustments for smaller screens */
+.action-buttons {
+    text-align: center;
+    margin-top: 20px;
+}
+
+.delete-account,
+.save-changes {
+    padding: 12px 40px;
+    font-size: 16px;
+    font-weight: bold;
+    background-color: #fb8c42; /* Orange button background */
+    color: #fff;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+    margin-right: 10px;
+}
+
+.save-changes {
+    background-color: #1abc9c; /* Green button background */
+}
+
+.delete-account:hover,
+.save-changes:hover {
+    opacity: 0.9;
+}
+
+/* Navbar styles */
+.navbar {
+    background-color: #283048; /* Dark blue */
+    color: #fff;
+    padding: 10px 20px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    position: fixed;
+    top: 0;
+    width: 100%;
+    z-index: 1000;
+}
+
+.navbar a {
+    color: #fff;
+    text-decoration: none;
+    display: flex;
+    align-items: center;
+}
+
+.navbar a img {
+    margin-right: 5px;
+}
+
+.profile-icon {
+    width: 30px;
+    height: 30px;
+    border-radius: 50%;
+    margin-left: auto;
+}
+
+.menu {
+    display: none;
+}
+
+/* Media query for responsiveness */
+@media (max-width: 768px) {
     .container {
-        padding: 20px; /* Reduce padding */
-        height: auto; /* Allow height to adjust */
-    }
-    .navbar {
-        font-size: 0.8em; /* Decrease font size */
-    }
-    .profile-icon {
-        width: 50px;
-        height: 50px;
-    }
-    .profile-icon-large {
-        width: 80px;
-        height: 80px;
-    }
-    .username {
-        font-size: 1.2em;
-    }
-    .edit-line input {
-        margin-right: 0; /* Remove right margin */
+        padding: 20px;
     }
     .action-buttons {
-        flex-direction: column; /* Stack buttons vertically */
+        margin-top: 10px;
     }
     .delete-account,
     .save-changes {
-        width: 100%; /* Full width for buttons */
-        margin: 10px 0; /* Add margin between buttons */
+        width: 100%;
+        margin-right: 0;
+        margin-bottom: 10px;
     }
 }
+
+/* End of settings.css */

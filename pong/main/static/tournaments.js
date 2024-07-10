@@ -619,7 +619,7 @@ if (usernameInput && passwordInput) {
         var user = document.createElement("div");
         user.className = "tournament-user";
         user.innerHTML = `
-            <img src="./public/guest.png" alt="User">
+            <img src="/static/guest.png" alt="User">
             <span>${usernameInput}</span>
         `;
         userList.appendChild(user);
@@ -687,6 +687,7 @@ var userList = document.getElementById("tournamentUserList");
 userList.innerHTML = '';
 joinedUsers = 0;
 document.getElementById("newTournamentButton").style.display = "none";
+window.location.href = '/local_tournament';
 }
 
 
