@@ -11,7 +11,7 @@ from rest_framework import status
 from rest_framework.views import APIView
 from rest_framework.response import Response
 from rest_framework.permissions import IsAuthenticated
-
+from django.contrib.auth.hashers import make_password, check_password
 from django.views.decorators.csrf import csrf_exempt
 
 import json
@@ -43,12 +43,44 @@ def tournament(request, id):
 @csrf_exempt
 def join_tournament(request, id):
     if request.method == 'POST':
-        print("join_tournament" )
-        data = json.loads(request.body)
-        users = User.objects.all()
-        #by taking the given username and password check if the user is exist in the database   
-        return JsonResponse({'message': 'Player not created'})
-        return JsonResponse({'message': 'GET request received'})
+        try:
+            data = json.loads(request.body)
+        except json.JSONDecodeError:
+            return JsonResponse({'message': 'Invalid JSON'}, status=400)
+        requested_data = data.get('requested_data')
+        if not requested_data:
+            return JsonResponse({'message': 'No requested_data found'}, status=400)
+        
+        username = requested_data.get('username')
+        password = requested_data.get('password')
+        try:
+            user = User.objects.get(username=username, password=password)
+        except User.DoesNotExist:
+            return JsonResponse({'message': 'User not found'}, status=404)
+        try:
+            player = Player.objects.get(user=user)
+        except Player.DoesNotExist:
+            return JsonResponse({'message': 'Player not found'}, status=404)
+        for game in PongGame.objects.all():
+            if user in game.players.all():
+                return JsonResponse({'message': 'Player already in a game'}, status=400)
+        game = PongGame.objects.filter(game_process=False).exclude(players=user).first()
+        if game is None or game.is_full():
+            game = PongGame.objects.create(game_mode=requested_data.get('game_mode', 'default'))
+        game.players.add(user)
+    return JsonResponse({'message': 'GET request received'})      
+
+
+@csrf_exempt
+def start_tournament(request, id):
+    if request.method == 'POST':
+        games = PongGame.objects.filter(game_process=False)
+        players = []
+        for game in games:
+            if game.players.count() == 4:
+                players.extend([player.username for player in game.players.all()])
+        print("🏓 players", players)
+        return JsonResponse({'message': 'Tournament started', 'users': players})
 
 @csrf_exempt
 def invite(request, id):

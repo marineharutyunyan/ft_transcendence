@@ -26,7 +26,9 @@ def get_access_token(code):
         'redirect_uri': os.environ.get('INTRA_REDIRECT_URI'),
         'code': code,
     }
+    print(data)
     response = requests.post('https://api.intra.42.fr/oauth/token', data=data)
+    print(response)
     if response.status_code != 200:
         return None
     return response.json()
@@ -63,16 +65,16 @@ def login(request):
             refresh = RefreshToken.for_user(user)
             # player = Player.objects.get(user=user)
 
-            if user.is_active:
-                return JsonResponse({'error': 'User already logged in'}, status=400)
+            # if user.is_active:
+            #     return JsonResponse({'error': 'User already logged in'}, status=400)
             user.last_login = None
             user.is_active = True
             user.save()
         else:
             access = AccessToken.for_user(user)
             refresh = RefreshToken.for_user(user)
-            if user.is_active:
-                return JsonResponse({'error': 'User already logged in'}, status=400)
+            # if user.is_active:
+            #     return JsonResponse({'error': 'User already logged in'}, status=400)
             user.last_login = None
             user.is_active = True
             user.save()

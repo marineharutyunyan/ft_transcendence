@@ -87,36 +87,38 @@ document.addEventListener("DOMContentLoaded", function() {
       })
       .then(response =>
       {
-          if (!response.ok)
-          {
-                throw new Error('Network response was not ok');
-            }
-            return response.json();
-        })
+        if (!response.ok)
+        {
+          throw new Error('Network response was not ok');
+        }
+        return response.json();
+      })
       .then(data =>
       {
-            console.log(data);
+          console.log(data);
           if (data.status === "error")
           {
-                alert(data.message);
-            }
-            else
+            alert(data.message);
+          }
+          else
+          {
+            localStorage.setItem('access', data.access);
+            localStorage.setItem('refresh', data.refresh);
+            localStorage.setItem('default_image', data.image);
+            const imgElement = document.getElementById('profileImage');
+            imgElement.src = `data:image/jpg;base64,${data.image}`;
+            const userId = extractUserIdFromToken(data.access);
+            if (!userId)
             {
-                  localStorage.setItem('access', data.access);
-                  localStorage.setItem('refresh', data.refresh);
-                  localStorage.setItem('default_image', data.image);
-              // const userId = extractUserIdFromToken(data.access);
-              // if (!userId)
-              // {
-              //     alert('Invalid token. Please log in again.');
-              //     window.location.href = '/';
-              //     return;
-              // }
+                alert('Invalid token. Please log in again.');
+                window.location.href = '/';
+                return;
+            }
           }
         })
       .catch(error =>
       {
-            alert("Invalid username");
+          alert("Invalid username");
           console.error('There has been a problem with your fetch operation:', error);
           window.location.href = '/';
       });

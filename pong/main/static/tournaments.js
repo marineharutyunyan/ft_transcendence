@@ -555,6 +555,8 @@
 
 // applyLanguage()
 
+
+
 // JavaScript for the profile menu
 document.addEventListener("DOMContentLoaded", function() {
     var profileImage = document.getElementById("profileImage");
@@ -567,6 +569,9 @@ document.addEventListener("DOMContentLoaded", function() {
             menu.style.display = "block";
         }
     });
+const base64Image = localStorage.getItem('default_image');
+    const imgElement = document.getElementById('profileImage');
+    imgElement.src = `data:image/jpg;base64,${base64Image}`;
 
     // Close the menu when clicking outside of it
     window.addEventListener("click", function(event) {
@@ -574,10 +579,8 @@ document.addEventListener("DOMContentLoaded", function() {
             menu.style.display = "none";
         }
     });
-    const base64Image = localStorage.getItem('default_image');
-    const imgElement = document.getElementById('profileImage');
-    imgElement.src = `data:image/jpg;base64,${base64Image}`;
-});
+    });
+
 
 var profilePic = localStorage.getItem('profilePic');
 document.getElementById('profileImage').src = profilePic || 'profile.jpg';
@@ -610,17 +613,124 @@ document.getElementById('joinFormModal').style.display = 'none';
 
 var joinedUsers = 0;
 
-function joinTournament() {
+async function hashPassword(password) {
+    if (window.crypto && window.crypto.subtle) {
+        // Modern browsers with Web Crypto API support
+        const encoder = new TextEncoder();
+        const data = encoder.encode(password);
+        try {
+            const hash = await crypto.subtle.digest('SHA-256', data);
+            return Array.from(new Uint8Array(hash))
+                .map(b => b.toString(16).padStart(2, '0'))
+                .join('');
+        } catch (error) {
+            console.error('Error hashing password with Web Crypto API:', error);
+            throw error;
+        }
+    } else {
+        // Fallback for older browsers without Web Crypto API support
+        try {
+            const hash = CryptoJS.SHA256(password);
+            return hash.toString(CryptoJS.enc.Hex);
+        } catch (error) {
+            console.error('Error hashing password with crypto-js:', error);
+            throw error;
+        }
+    }
+}
+
+async function validateUser(username, password) {
+    token = localStorage.getItem('access');
+    if (!token)
+    {
+        alert('No token found. Please log in.');
+        window.location.href = '/';
+        return;
+    }
+    const userId = extractUserIdFromToken(token);
+    if (!userId)
+    {
+        alert('Invalid token. Please log in again.');
+        window.location.href = '/';
+        return;
+    }
+
+    const url = `http://10.12.17.4:8000/api/v1/validate_user/${userId}/`;
+    try {
+        const response = await fetch(url, {
+            method: 'GET',
+            headers: {
+                'Content-Type': 'application/json',
+                'Authorization': 'Bearer ' + token
+            },
+            body: JSON.stringify({ username: username, password: password })
+        });
+        const result = await response.json();
+        return true;
+    } catch (error) {
+        console.error('Error validating user:', error);
+        return false;
+    }
+}
+
+
+
+async function joinTournament() {
+var isValidUser = true;
 var usernameInput = document.getElementById('usernameInput').value;
 var passwordInput = document.getElementById('passwordInput').value;
+const hashedPassword = await hashPassword(passwordInput);
+    const token = localStorage.getItem('access');
+    if (!token)
+    {
+        alert('No token found. Please log in.');
+        window.location.href = '/';
+        return;
+    }
+    const userId = extractUserIdFromToken(token);
+    if (!userId)
+    {
+        alert('Invalid token. Please log in again.');
+        window.location.href = '/';
+        return;
+    }
+
+    const url = `http://10.12.17.4:8000/api/v1/join_tournament/${userId}/`;
+    await fetch(url, {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json',
+            'Authorization': 'Bearer ' + token
+        },
+        body: JSON.stringify({requested_data: {username: usernameInput, password: hashedPassword}})
+    })
+    .then(response => {
+        debugger;
+        if (!response.ok) {
+            throw new Error('Network response was not ok');
+        }
+        return response.json();
+    })
+    .then(data => {
+        console.log(data);
+        // localStorage.setItem('default_image', image);
+    })
+    .catch(error => {
+        debugger;
+        isValidUser = false;
+        // event.preventDefault();
+        console.error('There was a problem with the fetch operation:', error);
+    });
+
 if (usernameInput && passwordInput) {
+// const isValidUser = await validateUser(usernameInput, passwordInput);
+    if (isValidUser == true) {
     if (joinedUsers < 4) {
         var userList = document.getElementById("tournamentUserList");
         var user = document.createElement("div");
         user.className = "tournament-user";
         user.innerHTML = `
-            <img src="/static/guest.png" alt="User">
-            <span>${usernameInput}</span>
+                        <span>${usernameInput}</span>
         `;
         userList.appendChild(user);
         joinedUsers++;
@@ -629,7 +739,26 @@ if (usernameInput && passwordInput) {
             var newTournamentButton = document.getElementById("newTournamentButton");
             newTournamentButton.style.display = "block";
         }
+// Clear the input fields after submission
+        document.getElementById('usernameInput').value = '';
+        document.getElementById('passwordInput').value = '';
 
+        // Close the modal after submission
+        closeModal();
+    }
+
+}   else {
+        isValidUser = true;
+        alert("Invalid username or password. Please try again");
+    }
+ 
+}else {
+        alert("Please fill in both fields.");
+
+    }
+}
+
+async function startNewTournament(event) {
         const token = localStorage.getItem('access');
         if (!token)
         {
@@ -644,50 +773,45 @@ if (usernameInput && passwordInput) {
             window.location.href = '/';
             return;
         }
+debugger
+    const url = `http://10.12.17.4:8000/api/v1/start_tournament/${userId}/`;
 
-        const url = `http://10.12.11.2:8000/api/v1/join_tournament/${userId}/`;
-        fetch(url, {
+        await fetch(url, {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',
                 'Authorization': 'Bearer ' + token
-            },
-            body: JSON.stringify({requested_data: {username: usernameInput, password: passwordInput}})
+            }
         })
         .then(response => {
             if (!response.ok) {
                 throw new Error('Network response was not ok');
             }
             return response.json();
+
         })
         .then(data => {
             console.log(data);
+// const parsedData = JSON.parse(data);
+        // console.log(parsedData)
+        localStorage.setItem('users', data.users);
         })
         .catch(error => {
             console.error('There was a problem with the fetch operation:', error);
         });
-        // Clear the input fields after submission
-        document.getElementById('usernameInput').value = '';
-        document.getElementById('passwordInput').value = '';
-
-        // Close the modal after submission
-        closeModal();
-    }
-} 
-    else {
-        alert("Please fill in both fields.");
-    }
-}
-
-function startNewTournament(event) {
-// Your logic for starting a new tournament
-alert("Starting a new tournament!");
+        // Your logic for starting a new tournament
+alert("Havala");
+    console.log(url);
+    // url = 'http://10.12.17.4:8000/local_tournament/';
+    debugger
+    // console.log(url);
+    window.location.href = 'http://10.12.17.4:8000/local_tournament/';
+    // console.log(url);
 // Reset the tournament for new users
 var userList = document.getElementById("tournamentUserList");
 userList.innerHTML = '';
 joinedUsers = 0;
 document.getElementById("newTournamentButton").style.display = "none";
-window.location.href = '/local_tournament';
 }
 
 

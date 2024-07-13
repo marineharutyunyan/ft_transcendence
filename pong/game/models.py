@@ -26,12 +26,12 @@ class GameInvite(models.Model):
 
 class PongGame(models.Model):
     players = models.ManyToManyField(User, related_name='pong_games')
-    max_players = models.IntegerField(default=2)
+    max_players = models.IntegerField(default=4)
     game_process = models.BooleanField(default=False)
     game_mode = models.CharField(max_length=25)
 
     def __str__(self):
-        return f'{self.players.all()}'
+        return f'PongGame({self.id}): ' + ', '.join([user.username for user in self.players.all()])
     
     def is_full(self):
         return self.players.count() == self.max_players

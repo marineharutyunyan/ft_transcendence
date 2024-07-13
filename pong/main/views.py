@@ -35,23 +35,38 @@ from django.core.files.storage import default_storage
 def index(request):
     return render(request, 'index.html')
 
+@csrf_exempt
 def home(request):
-    # print("❌, home")
-    # if request.method == 'POST':
-    #         try:
-    #             user = User.objects.get(id = id)
-
-    #             if user is None:
-    #                 return JsonResponse({'error': 'Invalid credentials'}, status=400)
-    #         except User.DoesNotExist:
-    #             return JsonResponse({'error': 'Invalid credentials'}, status=400)
-    # if request.method == 'GET':
-    #     return render(request, 'main/home.html')
+    if request.method == 'POST':
+        try:
+            data = json.loads(request.body)
+        except json.JSONDecodeError:
+            return JsonResponse({'message': 'Invalid JSON'}, status=400)
+        winners = data.get('winners')
+        if not winners:
+            return JsonResponse({'message': 'No winners provided'}, status=400)
+        round1 = User.objects.get(username=winners[0])
+        round2 = User.objects.get(username=winners[1])
+        player = User.objects.get(username=winners[2])
+        History.objects.create(
+            player=Player.objects.get(user=round1),
+            opponent=Player.objects.get(user=round2),
+            points=10, game_mode='1v1', result='win'
+            )
+        game = None
+        for pong_game in PongGame.objects.all():
+            if player in pong_game.players.all():
+                game = pong_game
+                break
+        if not game:
+            return JsonResponse({'message': 'Game not found for the player'}, status=404)
+        game.players.clear()
+        game.save()
+        return JsonResponse({'message': 'Players updated successfully'}, status=200)
     return render(request, 'main/home.html')
 
-
 @csrf_exempt
-def language(request):
+def language(request, id):
     if request.method == 'PUT':
         try:
             player = Player.objects.get(id=id)

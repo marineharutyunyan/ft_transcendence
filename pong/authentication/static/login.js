@@ -17,7 +17,7 @@ function togglePasswordVisibility(inputId)
 }
 
 async function hashPassword(password) {
-    //
+//
     if (window.crypto && window.crypto.subtle) {
         // Modern browsers with Web Crypto API support
         const encoder = new TextEncoder();

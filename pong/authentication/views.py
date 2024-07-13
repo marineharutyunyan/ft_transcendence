@@ -49,8 +49,8 @@ def signin(request):
             access = AccessToken.for_user(user)
             refresh = RefreshToken.for_user(user)
             if user is not None:
-                if user.is_active:
-                    return JsonResponse({'error': 'User already logged in'}, status=400)
+                # if user.is_active:
+                #     return JsonResponse({'error': 'User already logged in'}, status=400)
                 user.last_login = None
                 user.is_active = True
                 user.save()
@@ -113,7 +113,9 @@ def logout(request, id):
             refresh = data.get('refresh')
             token = RefreshToken(refresh)
             token.blacklist()
+            print("❌", id)
             user = User.objects.get(id=id)
+            print("❌", user)
             if user is None:
                 return JsonResponse({'error': 'User not found'}, status=404)
             user.last_login = timezone.now()

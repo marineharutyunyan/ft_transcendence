@@ -358,40 +358,40 @@ async function fetchData(tabName) {
 
 var dataFetched = false; // Boolean variable to check if data is fetched
 
-document.getElementById('friends-tab').addEventListener('click', async function() {
-  var friendsTab = document.getElementById('friends-tab');
-  var friendsContent = document.getElementById('friends-content');
-  var friendsList = document.getElementById('friends-list');
+// document.getElementById('friends-tab').addEventListener('click', async function() {
+//   var friendsTab = document.getElementById('friends-tab');
+//   var friendsContent = document.getElementById('friends-content');
+//   var friendsList = document.getElementById('friends-list');
 
-  // Check if data is already fetched
-  if (dataFetched) {
-      friendsTab.classList.add('active');
-      friendsContent.classList.add('active');
-      return;
-  }
+//   // Check if data is already fetched
+//   if (dataFetched) {
+//       friendsTab.classList.add('active');
+//       friendsContent.classList.add('active');
+//       return;
+//   }
 
-  // Fetch friends data from the server
-  try {
-      let response = await fetch('http://10.12.11.2:8000/api/friends');
-      let data = await response.json();
+//   // Fetch friends data from the server
+//   try {
+//       let response = await fetch('http://10.12.11.2:8000/api/friends');
+//       let data = await response.json();
 
-      // Populate the friends list
-      friendsList.innerHTML = '';
-      data.forEach(friend => {
-          let listItem = document.createElement('li');
-          listItem.textContent = friend.name; // Adjust according to your data structure
-          friendsList.appendChild(listItem);
-      });
+//       // Populate the friends list
+//       friendsList.innerHTML = '';
+//       data.forEach(friend => {
+//           let listItem = document.createElement('li');
+//           listItem.textContent = friend.name; // Adjust according to your data structure
+//           friendsList.appendChild(listItem);
+//       });
 
-      // Set dataFetched to true and display the content
-      dataFetched = true;
-      friendsTab.classList.add('active');
-      friendsContent.classList.add('active');
-      } 
-      catch (error) {
-          console.error('Error fetching friends data:', error);
-      }
-});
+//       // Set dataFetched to true and display the content
+//       dataFetched = true;
+//       friendsTab.classList.add('active');
+//       friendsContent.classList.add('active');
+//       } 
+//       catch (error) {
+//           console.error('Error fetching friends data:', error);
+//       }
+// });
 
 // Initially hide all tab contents
 tabContents.forEach(content => content.classList.remove('active'));
@@ -758,5 +758,58 @@ function remove_friend(event, id)
     console.log(data);
   })
 }
+
+document.getElementById('logoutId').addEventListener('click', function(e)
+{
+  const token = localStorage.getItem('access');
+  const refresh = localStorage.getItem('refresh');
+  requested_data = {
+    "token": token,
+    "refresh": refresh
+  }
+ 
+  console.log(token);
+  console.log(requested_data);
+  if (!token)
+  {
+    alert('No token found. Please log in.');
+    window.location.href = '/';
+    return;
+  }
+  const userId = extractUserIdFromToken(token);
+  if (!userId)
+  {
+    alert('Invalid token. Please log in again.');
+    window.location.href = '/';
+    return;
+  }
+  const url = `http://10.12.17.4:8000/api/v1/logout/${userId}/`;
+  fetch(url, {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json',
+      'Authorization': 'Bearer ' + token
+    },
+    body: JSON.stringify(requested_data)
+    
+  })
+  .then(response => {
+    if (!response.ok) {
+      throw new Error('Network response was not ok');
+    }
+    return response.json();
+  })
+  .then(data => {
+    console.log(userId);
+    console.log(token);
+    console.log(requested_data);
+    console.log(data);
+  })
+
+  localStorage.clear();
+  window.history.pushState({}, "", '/');
+  window.location.href = '/';
+});
+
 
 // document.addEventListener('DOMContentLoaded', applyLanguage);
