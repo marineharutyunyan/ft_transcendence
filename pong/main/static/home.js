@@ -89,16 +89,17 @@ document.addEventListener("DOMContentLoaded", function() {
       {
         if (!response.ok)
         {
-          throw new Error('Network response was not ok');
+          //throw new Error('Network response was not ok');
+          console.log(response);
         }
         return response.json();
       })
       .then(data =>
       {
           console.log(data);
-          if (data.status === "error")
+          if (data.error)
           {
-            alert(data.message);
+            alert(data.error);
           }
           else
           {
