@@ -655,7 +655,7 @@ async function validateUser(username, password) {
         return;
     }
 
-    const url = `http://10.12.17.4:8000/api/v1/validate_user/${userId}/`;
+    const url = `http://10.12.11.2:8000/api/v1/validate_user/${userId}/`;
     try {
         const response = await fetch(url, {
             method: 'GET',
@@ -695,7 +695,7 @@ const hashedPassword = await hashPassword(passwordInput);
         return;
     }
 
-    const url = `http://10.12.17.4:8000/api/v1/join_tournament/${userId}/`;
+    const url = `http://10.12.11.2:8000/api/v1/join_tournament/${userId}/`;
     await fetch(url, {
         method: 'POST',
         headers: {
@@ -774,7 +774,7 @@ async function startNewTournament(event) {
             return;
         }
 debugger
-    const url = `http://10.12.17.4:8000/api/v1/start_tournament/${userId}/`;
+    const url = `http://10.12.11.2:8000/api/v1/start_tournament/${userId}/`;
 
         await fetch(url, {
             method: 'POST',
@@ -802,10 +802,10 @@ debugger
         // Your logic for starting a new tournament
 alert("Havala");
     console.log(url);
-    // url = 'http://10.12.17.4:8000/local_tournament/';
+    // url = 'http://10.12.11.2:8000/local_tournament/';
     debugger
     // console.log(url);
-    window.location.href = 'http://10.12.17.4:8000/local_tournament/';
+    window.location.href = 'http://10.12.11.2:8000/local_tournament/';
     // console.log(url);
 // Reset the tournament for new users
 var userList = document.getElementById("tournamentUserList");

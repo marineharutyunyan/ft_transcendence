@@ -48,11 +48,40 @@ def home(request):
         round1 = User.objects.get(username=winners[0])
         round2 = User.objects.get(username=winners[1])
         player = User.objects.get(username=winners[2])
-        History.objects.create(
-            player=Player.objects.get(user=round1),
-            opponent=Player.objects.get(user=round2),
-            points=10, game_mode='1v1', result='win'
-            )
+        if player == round1:
+            History.objects.create(
+                player=Player.objects.get(user=round1),
+                opponent=Player.objects.get(user=round2),
+                points=10, game_mode='1v1', result='win'
+                )
+            History.objects.create(
+                player=Player.objects.get(user=round2),
+                opponent=Player.objects.get(user=round1),
+                points=0, game_mode='1v1', result='lose'
+                )
+            player1 = Player.objects.get(user = round1)
+            player2 = Player.objects.get(user = round2)
+            player1.win = player1.win + 1
+            player2.lose = player2.lose + 1
+            player1.save()
+            player2.save()
+        else:
+            History.objects.create(
+                player=Player.objects.get(user=round2),
+                opponent=Player.objects.get(user=round1),
+                points=10, game_mode='1v1', result='win'
+                )
+            History.objects.create(
+                player=Player.objects.get(user=round1),
+                opponent=Player.objects.get(user=round2),
+                points=0, game_mode='1v1', result='lose'
+                )
+            player1 = Player.objects.get(user = round2)
+            player2 = Player.objects.get(user = round1)
+            player1.win = player1.win + 1
+            player2.lose = player2.lose + 1
+            player1.save()
+            player2.save()
         game = None
         for pong_game in PongGame.objects.all():
             if player in pong_game.players.all():

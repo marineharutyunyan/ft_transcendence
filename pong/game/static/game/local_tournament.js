@@ -32,7 +32,7 @@ function getUsers() {
     let users = localStorage.getItem('users');
     // users = JSON.parse(users);
     console.log(users);
-    // let url = `http://10.12.17.4:8000/start_tournament/`;
+    // let url = `http://10.12.11.2:8000/start_tournament/`;
     // fetch(url)
     // .then(response => response.json())
     // .then(data => {
@@ -246,8 +246,10 @@ function nextMatch() {
         players[3].username = players[finalists[1]].username;
     }
 
-    players[currentMatch[0]].score = 0;
-    players[currentMatch[1]].score = 0;
+    players[0].score = 0;
+    players[1].score = 0;
+    players[2].score = 0;
+    players[3].score = 0;
     gameOver = false;
     nextMatchButton.style.display = 'none';
     draw();

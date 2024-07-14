@@ -26,9 +26,9 @@ def get_access_token(code):
         'redirect_uri': os.environ.get('INTRA_REDIRECT_URI'),
         'code': code,
     }
-    print(data)
+    # print(data)
     response = requests.post('https://api.intra.42.fr/oauth/token', data=data)
-    print(response)
+    # print(response)
     if response.status_code != 200:
         return None
     return response.json()

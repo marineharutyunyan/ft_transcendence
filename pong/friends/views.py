@@ -29,7 +29,7 @@ def friends(request, pk):
 			return JsonResponse({'message': 'No friends'}, status=200)
 		#send friends id username friends is_active and their images to the frontend
 		friends = [{'id': friend.pk, 'username': friend.username, 'is_active': friend.is_active, 'image': friend.player.image} for friend in friends]
-		print(friends)
+		# print(friends)
 		# friends = [{'id': friend.pk, 'username': friend.username, 'image': friend.player.image} for friend in friends]
 		return JsonResponse(friends, safe=False)
 

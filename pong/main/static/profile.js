@@ -783,7 +783,7 @@ document.getElementById('logoutId').addEventListener('click', function(e)
     window.location.href = '/';
     return;
   }
-  const url = `http://10.12.17.4:8000/api/v1/logout/${userId}/`;
+  const url = `http://10.12.11.2:8000/api/v1/logout/${userId}/`;
   fetch(url, {
     method: 'POST',
     headers: {
