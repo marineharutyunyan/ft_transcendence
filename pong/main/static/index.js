@@ -1,3 +1,6 @@
+
+
+
 var languageSelect = document.getElementById("languageSelect");
 var selectedLanguage = localStorage.getItem('selectedLanguage') || 'en';
 
@@ -8,10 +11,7 @@ languageSelect.addEventListener("change", function() {
     applyLanguage();
 });
 
-function applyLanguage() {
-    const language = localStorage.getItem('selectedLanguage') || 'en';
-    document.documentElement.lang = language;
-
+function applyLanguage(translations) {
     var translations = {
         "en": {
             "header":"Welcome to Pong Game! Let's Play and Connect!",
@@ -42,16 +42,13 @@ function applyLanguage() {
             "or": "或者"
         }
     };
+    const language = localStorage.getItem('selectedLanguage') || 'en';
+    document.documentElement.lang = language;
 
-
-    debugger;
     for (const property in translations[language]) {
         document.getElementById(property).innerHTML = translations[language][property];
-        // console.log(`${property}: ${object[property]}`);
     }
-    // document.getElementById('confirmEmail').textContent = translations[language].confirmEmail;
-    // document.getElementById('enterConfirm').textContent = translations[language].enterConfirm;
-    // document.getElementById('confirmButton').textContent = translations[language].confirmButton;
 }
 
+// document.addEventListener('DOMContentLoaded', (function(){applyLanguage()}()));
 document.addEventListener('DOMContentLoaded', applyLanguage);

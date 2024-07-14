@@ -623,7 +623,6 @@ function applyLanguage() {
         });
     });
   }
-applyLanguage();
 
 document.addEventListener("DOMContentLoaded", function()
 {
@@ -684,4 +683,6 @@ document.addEventListener("DOMContentLoaded", function()
             });
             return data;
         }
+
+    applyLanguage();
 });
