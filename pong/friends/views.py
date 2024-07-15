@@ -45,10 +45,26 @@ def requests(request, pk):
 
 def users_list(request, pk):
 	if request.method == 'GET':
+		user = User.objects.get(pk=pk)
+		friends = Friend.objects.friends(user)
+
+		requests = FriendshipRequest.objects.filter(to_user=pk)
+		player = Player.objects.get(user=pk)
+		
+		friends_set = set()
+		for i in range(0, len(friends), 2):
+			friends_set.add(friends[i].pk)
+		print("player = ", player)
+		player = [player,]
+		if type(player) == list:
+			for i in range(0, len(player), 2):
+				friends_set.add(player[i].pk)
 		users = User.objects.all()
 		player = Player.objects.get(user=pk)
+		print(friends_set)
 		# send users id username and their images to the frontend
-		users = [{'id': user.pk, 'username': user.username, 'image': user.player.image} for user in users if user.pk != pk]
+		users = [{'id': user.pk, 'username': user.username, 'image': user.player.image, 'is_friend': True if user.pk in friends_set else False} for user in users if user.pk != pk]
+		
 		return JsonResponse(users, safe=False)
 
 @csrf_exempt

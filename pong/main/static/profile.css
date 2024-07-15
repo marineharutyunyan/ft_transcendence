@@ -291,6 +291,10 @@ body {
     margin-bottom: 15px; /* Add some margin for better appearance when wrapped */
 }
 
+.container div h3 {
+    display: inline ;
+}
+
 .arrow-button {
     display: flex;
     align-items: center;

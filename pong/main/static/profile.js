@@ -71,6 +71,8 @@ function applyLanguage() {
               "settingsId": "SETTINGS",
               "logoutId":"LOG OUT",
               "prof":"Profile",
+              "winsCount": "Wins Count: ",
+              "loseCount": "Lose Count: ",
               "guest": "Username",
               "listHeader":"Friends List",
               "searchInput":"Search friends...",
@@ -90,6 +92,8 @@ function applyLanguage() {
               "settingsId": "ԿԱՐԳԱՎՈՐՈՒՄՆԵՐ",
               "logoutId":"ԴՈՒՐՍ ԳԱԼ",
               "prof":"Անձնական էջ",
+              "winsCount": "Հաղթանակների քանակ: ",
+              "loseCount": "Պարտությունների քանակ: ",
               "guest": "Օգտանունը",
               "listHeader":"Ընկերների ցանկ",
               "searchInput":"Փնտրել ընկերներին...",
@@ -109,6 +113,8 @@ function applyLanguage() {
               "settingsId": "НАСТРОЙКИ",
               "logoutId":"ВЫЙТИ",
               "prof":"Профиль",
+              "winsCount": "Количество побед: ",
+              "loseCount": "Количество поражений: ",
               "guest": "Имя пользователя",
               "listHeader":"Список друзей",
               "searchInput":"Поиск друзей...",
@@ -128,6 +134,8 @@ function applyLanguage() {
               "settingsId": "設定",
               "logoutId":"登出",
               "prof":"輪廓",
+              "winsCount": "胜利次数：",
+              "loseCount": "损失数量: ",
               "guest": "使用者名稱",
               "listHeader":"好友列表",
               "searchInput":"搜尋好友...",
@@ -149,6 +157,8 @@ function applyLanguage() {
       'logoutId': 'logoutId',
       'prof': 'prof',
       'guest': 'guest',
+      'winsCount':'winsCount',
+      'loseCount':'loseCount',
       'listHeader': 'listHeader',
       'friends': 'friends',
       'request': 'request',
@@ -299,11 +309,47 @@ async function fetchData(tabName) {
       const data = await response.json();
       tabContent.innerHTML = ''; // Clear previous content
       if (Array.isArray(data) && data.length > 0) {
+        var translations = {
+          "en": {
+              "removeBtn": "Remove",
+              "addBtn": "Add",
+              "online": "Online",
+              "offline": "Offline",
+              "accept": "Accept",
+              "decline": "Decline"
+          },
+          "hy": {
+              "removeBtn": "Ջնջել",
+              "addBtn": "Ավելացնել",
+              "online": "Առցանց",
+              "offline": "Անցանց",
+              "accept": "Ընդունել",
+              "decline": "Մերժել"
+          },
+          "ru": {
+              "removeBtn": "Удалить",
+              "addBtn": "Добавить",
+              "online": "Онлайн",
+              "offline": "Оффлайн",
+              "accept": "Принять",
+              "decline": "Отклонить"
+          },
+          "cn": {
+              "removeBtn": "删除",
+              "addBtn": "添加",
+              "online": "在线",
+              "offline": "离线",
+              "accept": "接受",
+              "decline": "拒绝"
+          }
+      };
+      var selectedLanguage = localStorage.getItem('selectedLanguage') || 'en';  
+
         if (tabName === 'Friends') {
             data.forEach(item => {
                 const div = document.createElement('div');
                 const profile_src = `data:image/jpg;base64,${item.image}`;
-                online_status = item.is_active ? 'Online' : 'Offline';
+                online_status = item.is_active ? translations[selectedLanguage].online : translations[selectedLanguage].  offline;
                 div.className = 'friend';
               div.innerHTML = `
               <img src="${profile_src}" alt="${item.username}" class="friend-picture">
@@ -311,7 +357,7 @@ async function fetchData(tabName) {
               <span class="friend-username">${item.username}</span>
               <span class="friend-activity">${online_status}</span>
               </div>
-              <button class="details-button" data-action="details" onclick="remove_friend(event, ${item.id})">Remove</button>
+              <button class="details-button" data-action="details" onclick="remove_friend(event, ${item.id})">${translations[selectedLanguage].removeBtn}</button>
               `;
               tabContent.appendChild(div);
             });
@@ -324,8 +370,8 @@ async function fetchData(tabName) {
                     <img src="${profile_pic}" alt="${item.username}" class="friend-picture">
                     <div class="friend-info">
                         <span class="friend-username">${item.username}</span>
-                        <button class="accept-button" data-action="accept" onclick="accept_request(event,${item.id})">Accept</button>
-                        <button class="decline-button" data-action="decline" onclick="decline_request(event, ${item.id})">Decline</button>
+                        <button class="accept-button" data-action="accept" onclick="accept_request(event,${item.id})">${translations[selectedLanguage].accept}</button>
+                        <button class="decline-button" data-action="decline" onclick="decline_request(event, ${item.id})">${translations[selectedLanguage].decline}</button>
                     </div>
                 `;
                 tabContent.appendChild(div);
@@ -338,8 +384,8 @@ async function fetchData(tabName) {
                 div.innerHTML = `
                     <img src="${profile_picture}" alt="${item.username}" class="friend-picture">
                     <div class="friend-info">
-                        <span class="friend-username">${item.username}</span>
-                        <button class="add-button" data-action="add" onclick="add_friend(event, ${item.id})">Add</button>
+                        <span class="friend-username">${item.username}</span> 
+                        ${!item.is_friend ? `<button class="add-button" data-action="add" onclick="add_friend(event, ${item.id})">${translations[selectedLanguage].addBtn}</button>` : ''}
                     </div>
                 `;
                 tabContent.appendChild(div);

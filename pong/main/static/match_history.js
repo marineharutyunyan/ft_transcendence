@@ -10,6 +10,60 @@ document.addEventListener("DOMContentLoaded", function() {
         }
     });
 
+    var translations = {
+        "en": {
+            "header": "Match History",
+            "profile":"PROFILE",
+            "homeheader": "HOME",
+            "settingsId":"SETTINGS",
+            "logoutId":"LOG OUT",   
+            "players_list": "Players",
+            "points": "Points",
+            "date": "Date",
+            "result": "Result"
+        },
+        "hy": {
+            "header": "Խաղի պատմություն",
+            "profile": "ԱՆՁՆԱԿԱՆ ԷՋ",
+            "homeheader": "ԳԼԽԱՎՈՐ",
+            "settingsId": "ԿԱՐԳԱՎՈՐՈւՄՆԵՐ",
+            "logoutId": "ԴՈւՐՍ ԳԱԼ",
+            "players_list": "Խաղացողներ",
+            "points": "Միավորներ",
+            "date": "Ամսաթիվ",
+            "result": "Արդյունք"
+        },
+        "ru": {
+            "header": "История матчей",
+            "profile": "ПРОФИЛЬ",
+            "homeheader": "ДОМОЙ",
+            "settingsId": "НАСТРОЙКИ",
+            "logoutId": "ВЫЙТИ",
+            "players_list": "Игроки",
+            "points": "Очки",
+            "date": "Дата",
+            "result": "Результат"
+        },
+        "cn": {
+            "header": "比赛历史",
+            "profile": "个人资料",
+            "homeheader": "首页",
+            "settingsId": "设置",
+            "logoutId": "登出",
+            "players_list": "玩家",
+            "points": "得分",
+            "date": "日期",
+            "result": "结果"
+        }
+    };
+    var language = localStorage.getItem('selectedLanguage') || 'en';  
+
+    document.documentElement.lang = language;
+
+    for (const property in translations[language]) {
+        document.getElementById(property).innerHTML = translations[language][property];
+    }
+    
     // Close the menu when clicking outside of it
     window.addEventListener("click", function(event) {
         if (!event.target.matches("#profileImage") && !event.target.matches(".menu")) {
@@ -67,6 +121,30 @@ document.addEventListener("DOMContentLoaded", function() {
 });
 
 function populateTable(data) {
+    var translations = {
+        "en": {
+            "no_point": "N/A",
+            "lose": "lose",
+            "win": "win"
+        },
+        "hy": {
+            "no_point": "-",
+            "lose": "պարտություն",
+            "win": "հաղթանակ"
+        },
+        "ru": {
+            "no_point": "-",
+            "lose": "проигрыш",
+            "win": "победа"
+        },
+        "cn": {
+            "no_point": "-",
+            "lose": "失利",
+            "win": "胜利"
+        }
+    };
+    var selectedLanguage = localStorage.getItem('selectedLanguage') || 'en';  
+
     const tableBody = document.querySelector('#matchHistoryTable tbody');
     tableBody.innerHTML = ''; // Clear existing data
 
@@ -82,7 +160,7 @@ function populateTable(data) {
         playerCell.setAttribute('data-label', 'Player List');
 
         const pointsCell = document.createElement('td');
-        pointsCell.textContent = match.points || 'N/A'; // Ensure points field exists or use default
+        pointsCell.textContent = match.points ||  translations[selectedLanguage].no_point ; // Ensure points field exists or use default
         pointsCell.setAttribute('data-label', 'Points');
 
         const dateCell = document.createElement('td');
@@ -90,7 +168,7 @@ function populateTable(data) {
         dateCell.setAttribute('data-label', 'Date');
 
         const resultCell = document.createElement('td');
-        resultCell.textContent = match.result;
+        resultCell.textContent = match.result.toLowerCase() === 'win' ? translations[selectedLanguage].win :  translations[selectedLanguage].lose;
         resultCell.classList.add(match.result.toLowerCase() === 'win' ? 'result-win' : 'result-lose');
         resultCell.setAttribute('data-label', 'Result');
 

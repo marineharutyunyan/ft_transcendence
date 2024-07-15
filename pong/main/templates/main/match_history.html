@@ -14,10 +14,10 @@
     <body>
         <div class="navbar">
             <a href="/home" id="homeId">
-                <img alt="HOME" src="{% static 'images/icons8-home-20.png' %}" /> <span id="homeheader">HOME</span>
+                <img alt="HOME" src="{% static 'images/icons8-home-20.png' %}" /> <span id="homeheader"></span>
             </a>
             <a href="/profile" id="profileId">
-                <img alt="PROFILE" src="{% static 'images/icons8-customer-20.png' %}" /> <span id="profile">PROFILE</span>
+                <img alt="PROFILE" src="{% static 'images/icons8-customer-20.png' %}" /> <span id="profile"></span>
             </a>
             <img class="profile-icon" alt="Profile Picture" id="profileImage" src="" />
             <div class="menu" id="menu">
@@ -26,14 +26,14 @@
             </div>
         </div>
         <div class="container">
-            <h1 id="header">Match History</h1>
+            <h1 id="header"></h1>
             <table id="matchHistoryTable">
                 <thead>
                     <tr>
-                        <th>Player List</th>
-                        <th>Points</th>
-                        <th>Date</th>
-                        <th>Result</th>
+                        <th id="players_list">Players</th>
+                        <th id="points">Points</th>
+                        <th id="date">Date</th>
+                        <th id="result">Result</th>
                     </tr>
                 </thead>
                 <tbody>
