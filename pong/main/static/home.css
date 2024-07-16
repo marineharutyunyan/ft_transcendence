@@ -65,7 +65,7 @@ font-size: 1.5em;
     width: 65px;
     height: 65px;
     right: 60px;
-background-color: #07382a;
+    background-color: #07382a;
     border-radius: 50%;
     display: flex;
     justify-content: center;
@@ -132,7 +132,6 @@ text-align: center;
     max-width: 1600px;
     width: 100%;
     padding: 100px;
-    border-radius: 10px;
     flex-wrap: wrap-reverse;
 }
 
@@ -141,24 +140,19 @@ text-align: center;
     margin-right: 45px;
     position: relative;
     overflow: hidden;
-    border-radius: 20px;
+    border-radius: 8px;
     transition: transform 3s;
     transition: filter 0.5s;
 }
 
 .image-container img {
-width: 100%;
+width: 95%;
+border-radius: 10px;
+
     display: block;
     transition: transform 0.5s;
     max-width: 100%;
     height: auto;
-max-height: 500px;
-}
-
-.image-container:hover img {
-    transform: scale(1.1);
-    filter: brightness(70%);
-    transition: 0.5s;
 }
 
 .content {
@@ -195,10 +189,9 @@ width: 100%;
 .button {
     padding: 15px 40px;
     font-size: 1.7em;
-    background-color: #07382a;
+    background-color: #1abc9c;
     color: aliceblue;
     text-decoration: none;
-    border-radius: 50px;
     margin: 0 25px;
     transition: background-color 0.3s;
     width: 250px;
@@ -206,13 +199,14 @@ width: 100%;
     justify-content: center;
     align-items: center;
     cursor: pointer;
-    border: 2px solid white;
-    box-sizing: border-box;
     margin-top: 10px;
+    border: none;
+    border-radius: 5px;
+
 }
 
 .button:hover {
-    background-color: #397262;
+    background-color: #19ac8f;;
 }
 
 @media (max-width: 1000px) {

@@ -433,7 +433,9 @@ function applyLanguage() {
                 "h2Header":"Joined Users:",
                 "accept-button":"Join",
                 "decline-button":"Ignore",
-                "invite-button":"Invite"
+                "invite-button":"Invite",
+                "username": "Username",
+                "password":"Password",
             },
             "hy": {
                 "homeheader":"ԳԼԽԱՎՈՐ",
@@ -451,7 +453,9 @@ function applyLanguage() {
                 "h2Header":"Միացած օգտատերեր:",
                 "accept-button":"Միանալ",
                 "decline-button":"Անտեսել",
-                "invite-button":"Հրավիրել"
+                "invite-button":"Հրավիրել",
+                "username": "Օգտանուն",
+                "password":"Գաղտնաբառ",
             },
             "ru": {
                 "homeheader":"ГЛАВНАЯ",
@@ -469,7 +473,9 @@ function applyLanguage() {
                 "h2Header":"Присоединившиеся пользователи:",
                 "accept-button":"Присоединиться",
                 "invite-button":"Приглашать",
-                "decline-button":"Игнорировать"
+                "decline-button":"Игнорировать",
+                "username": "Имя пользователя",
+                "password":"Пароль",
             },
             "cn": {
                 "homeheader":"家",
@@ -487,9 +493,15 @@ function applyLanguage() {
                 "h2Header":"已加入用戶:",
                 "accept-button":"加入",
                 "invite-button":"邀請",
-                "decline-button":"忽略"
+                "decline-button":"忽略",
+                "username": "使用者名稱",
+                "password":"密碼",
             },
     };
+
+    document.getElementById('usernameInput').placeholder = translations[selectedLanguage].username;
+    document.getElementById('passwordInput').placeholder = translations[selectedLanguage].password;
+
     const elementsToTranslate = {
         'homeheader': 'homeheader',
         'profile': 'profile',

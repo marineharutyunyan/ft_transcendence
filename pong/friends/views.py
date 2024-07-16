@@ -29,7 +29,6 @@ def friends(request, pk):
 			return JsonResponse({'message': 'No friends'}, status=200)
 		#send friends id username friends is_active and their images to the frontend
 		friends = [{'id': friend.pk, 'username': friend.username, 'is_active': friend.is_active, 'image': friend.player.image} for friend in friends]
-		# print(friends)
 		# friends = [{'id': friend.pk, 'username': friend.username, 'image': friend.player.image} for friend in friends]
 		return JsonResponse(friends, safe=False)
 
@@ -47,7 +46,7 @@ def users_list(request, pk):
 	if request.method == 'GET':
 		user = User.objects.get(pk=pk)
 		friends = Friend.objects.friends(user)
-		print("friends", friends)
+		# print("friends", friends)
 
 		# requests = FriendshipRequest.objects.filter(to_user=pk)
 		# player = Player.objects.get(user=pk)
@@ -62,7 +61,7 @@ def users_list(request, pk):
 		# 		friends_set.add(player[i].pk)
 		users = User.objects.all()
 		# player = Player.objects.get(user=pk)
-		print(friends_set)
+		# print(friends_set)
 		# send users id username and their images to the frontend
 		users = [{'id': user.pk, 'username': user.username, 'image': user.player.image, 'is_friend': True if user.pk in friends_set else False} for user in users if user.pk != pk]
 		

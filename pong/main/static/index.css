@@ -7,13 +7,12 @@ body, html {
 /* Body styles */
 body {
     font-family: 'Poppins', sans-serif;
-    background-color: #f0f0f0;
+    background: linear-gradient(to right, #283048, #859398);
     color: #333;
 }
 
 /* Navbar styles */
 .navbar {
-    background-color: #283048;
     color: #fff;
     display: flex;
     align-items: center;
@@ -30,6 +29,10 @@ body {
     position: relative;
 }
 
+.content {   
+    margin-bottom: 35px;
+}
+
 #languageSelect {
     background-color: #fff;
     color: #333;
@@ -41,8 +44,8 @@ body {
 
 /* Container styles */
 .container {
-    max-width: 800px;
-    margin: 50px auto;
+    max-width: 1001px;
+    margin: 135px auto;
     background-color: #fff;
     border-radius: 10px;
     box-shadow: 0 8px 16px rgba(0, 0, 0, 0.3);
@@ -52,13 +55,18 @@ body {
 
 .image-container {
     flex: 1;
-    padding: 30px;
-    background-color: #1abc9c;
+    padding: 0;
+    position: relative; /* Ensure relative positioning for absolute content */
+    overflow: hidden; 
 }
 
 .image-container img {
-    max-width: 100%;
-    height: auto;
+    width: 100%; /* Stretch image to fill container width */
+    height: 100%; /* Stretch image to fill container height */
+    object-fit: cover; /* Cover entire container, maintaining aspect ratio */
+    position: absolute; /* Position image absolutely within container */
+    top: 0;
+    left: 0;
 }
 
 .content {
