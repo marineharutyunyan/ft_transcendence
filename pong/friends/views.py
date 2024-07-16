@@ -70,20 +70,27 @@ def users_list(request, pk):
 @csrf_exempt
 def add_friend(request, pk):
 	if request.method == 'POST':
-		sender = User.objects.get(pk=pk)
-		if not sender:
-			raise Exception('User not found')
-		data = json.loads(request.body)
-		if not data.get('receiver_id'):
-			raise Exception('Receiver not found')
-		receiver = User.objects.get(pk=data.get('receiver_id'))
-		if not receiver:
-			raise Exception('Receiver not found')
-		if FriendshipRequest.objects.filter(from_user=sender, to_user=receiver).exists():
-			raise Exception('Friend request already sent')
-		friend_request = FriendshipRequest.objects.create(from_user=sender, to_user=receiver)
-		friend_request.save()
-		return JsonResponse({'message': 'Friend request sent'})
+		try:
+			sender = User.objects.get(pk=pk)
+			if not sender:
+				raise Exception('User not found')
+			data = json.loads(request.body)
+			if not data.get('receiver_id'):
+				raise Exception('Receiver not found')
+			receiver = User.objects.get(pk=data.get('receiver_id'))
+			if not receiver:
+				raise Exception('Receiver not found')
+			if FriendshipRequest.objects.filter(from_user=sender, to_user=receiver).exists():
+				raise Exception('Friend request already sent')
+			friend_request = FriendshipRequest.objects.create(from_user=sender, to_user=receiver)
+			friend_request.save()
+			return JsonResponse({'message': 'Friend request sent'})
+
+		except User.DoesNotExist:
+			return JsonResponse({'error': 'User not found'}, status=404)
+
+		except Exception as e:
+			return JsonResponse({'error': str(e)}, status=400)
 
 @csrf_exempt
 def accept(request, pk):

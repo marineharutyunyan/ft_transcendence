@@ -678,13 +678,15 @@ function add_friend(event, id)
     },
     body: JSON.stringify(request_data)
   })
-
   .then(response => {
-    if (!response.ok) {
-      throw new Error('Network response was not ok');
-    }
-    return response.json();
-    })
+    return response.json();;
+  })
+  .then(data => {
+  if (data.error)
+    alert(data.error);
+  if (data.message)
+    alert(data.message);
+  });
 }
 
 function accept_request(event, id)
@@ -725,6 +727,8 @@ function accept_request(event, id)
     console.log(data);
   })
 
+  const parentElement = event.target.closest('.friend-request');
+  parentElement.remove();
 }
 
 function decline_request(event, id)
@@ -764,6 +768,8 @@ function decline_request(event, id)
   .then(data => {
     console.log(data);
   })
+  const parentElement = event.target.closest('.friend-request');
+  parentElement.remove();
 }
 
 function remove_friend(event, id)
@@ -785,24 +791,31 @@ function remove_friend(event, id)
   const request_data = {
       "receiver_id": id
   }
-  const url = `http://10.12.11.2:8000/api/v1/remove/${userId}/`;
-  fetch(url, {
-    method: 'POST',
-    headers: {
-        'Content-Type': 'application/json',
-        'Authorization': 'Bearer ' + token
-    },
-    body: JSON.stringify(request_data)
-  })
-  .then(response => {
-  if (!response.ok) {
-    throw new Error('Network response was not ok');
+  try {
+    const url = `http://10.12.11.2:8000/api/v1/remove/${userId}/`;
+    fetch(url, {
+      method: 'POST',
+      headers: {
+          'Content-Type': 'application/json',
+          'Authorization': 'Bearer ' + token
+      },
+      body: JSON.stringify(request_data)
+    })
+    .then(response => {
+      if (!response.ok) {
+        throw new Error('Network response was not ok');
+      }
+      return response.json();
+    })
+    .then(data => {
+      console.log(data);
+    });
+    const parentElement = event.target.closest('.friend');
+    parentElement.remove();
   }
-  return response.json();
-  })
-  .then(data => {
-    console.log(data);
-  })
+  catch (error) {
+    alert(error);
+  }
 }
 
 document.getElementById('logoutId').addEventListener('click', function(e)

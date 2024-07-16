@@ -16,11 +16,12 @@ body {
     position: absolute;
     top: 0;
     left: 15px; /* Changed to 0 */
-    right: 0; /* Added */
-    margin: 0 auto; /* Center the navbar */
+    right: 6px; /* Added */
+    margin: 0 20px; /* Center the navbar */
     display: flex;
     align-items: center;
     z-index: 1000;
+    padding-top: 15px;
 }
   
 .navbar a {
@@ -53,15 +54,13 @@ body {
 .profile-icon {
     width: 65px;
     height: 65px;
-    right: 60px;
+    right: 25px;
     background-color: #07382a;
     border-radius: 50%;
     display: flex;
     justify-content: center;
     align-items: center;
     margin-left: auto; /* Align to the right */
-    margin-right: 20px; /* Added margin for spacing */
-    margin-top: 30px;
     position: relative;
     cursor: pointer;
 }
@@ -73,8 +72,8 @@ body {
 .menu {
     display: none;
     position: absolute;
-    top: 95px;
-    right: 30px;
+    top: 86px;
+    right: -17px;
     background-color:rgba(255, 255, 255, 0.2);
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
     z-index: 100;
@@ -85,10 +84,9 @@ body {
     text-transform: uppercase;
     align-items: center;
     text-align: center;
-    border-radius: 25px;
-    border: 2px solid white;
+    border-radius: 7px;
 }
-  
+
 .menu a {
     display: block;
     text-decoration: none;
@@ -98,23 +96,25 @@ body {
     margin-top: 0;
     text-align: center;
     font-size: medium;
-    border-radius: 25px;
+    border-radius: 5px;
 }
-  
 .menu a:hover {
     background-color: rgba(205, 213, 204, 0.788);
-    border-radius: 25px;
-    transform: scale(1.0);
+    border-radius: 5px;
 }
-  
+
 .menu a.settings:hover {
     color: #053527; 
 }
-  
+
+.menu a.logout {
+    color: #960000;
+}
+
 .menu a.logout:hover {
     color: #960000;
 }
-  
+
 .container {
     max-width: 700px;
     height: 700px;

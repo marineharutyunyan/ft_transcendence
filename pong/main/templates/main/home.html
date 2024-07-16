@@ -16,6 +16,11 @@
         <a href="/profile" id = profileId>
             <img alt="PROFILE" src="{% static '/images/icons8-customer-20.png' %}" /> <span id="profileLink">PROFILE</span>
         </a>
+        <img class="profile-icon" alt="Profile Picture" id="profileImage" src="" />
+        <div class="menu" id="menu">
+            <a href="/settings" class="settings" id="settingsId">SETTINGS</a>
+            <a href="/" class="logout" id="logoutId">LOG OUT</a>
+        </div>
         <div class="dropdown-content" id="dropdownContent">
             <select name="language" id="languageSelect">
                 <option value="en">English</option>
@@ -24,11 +29,6 @@
                 <option value="cn">Chinese</option>
             </select>
         </div>
-            <img class="profile-icon" alt="Profile Picture" id="profileImage" src="" />
-            <div class="menu" id="menu">
-                <a href="/settings" class="settings" id="settingsId">SETTINGS</a>
-                <a href="/" class="logout" id="logoutId">LOG OUT</a>
-            </div>
     </div>
     <div class="container">
         <div class="image-container">
