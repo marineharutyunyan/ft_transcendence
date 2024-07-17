@@ -121,7 +121,13 @@ document.addEventListener("DOMContentLoaded", function() {
 });
 
 function populateTable(data) {
-    var translations = {
+    const table = document.getElementById('matchHistoryTable');
+
+    if(data.length === 0)
+        table.style.display = 'none'; 
+    else {
+        element.style.display = 'table';
+        var translations = {
         "en": {
             "no_point": "N/A",
             "lose": "lose",
@@ -146,38 +152,38 @@ function populateTable(data) {
     var selectedLanguage = localStorage.getItem('selectedLanguage') || 'en';  
 
     const tableBody = document.querySelector('#matchHistoryTable tbody');
-    tableBody.innerHTML = ''; // Clear existing data
+    tableBody.innerHTML = '';
+        data.forEach(match => {
+            const row = document.createElement('tr');
 
-    data.forEach(match => {
-        const row = document.createElement('tr');
+            const playerCell = document.createElement('td');
+            const playerImage = document.createElement('img');
+            playerImage.src = `data:image/jpg;base64,${match.image}`; // URL to the player's profile picture
+            const playerName = document.createTextNode(' ' + match.username); // Add a space between the image and name
+            playerCell.appendChild(playerImage);
+            playerCell.appendChild(playerName);
+            playerCell.setAttribute('data-label', 'Player List');
 
-        const playerCell = document.createElement('td');
-        const playerImage = document.createElement('img');
-        playerImage.src = `data:image/jpg;base64,${match.image}`; // URL to the player's profile picture
-        const playerName = document.createTextNode(' ' + match.username); // Add a space between the image and name
-        playerCell.appendChild(playerImage);
-        playerCell.appendChild(playerName);
-        playerCell.setAttribute('data-label', 'Player List');
+            const pointsCell = document.createElement('td');
+            pointsCell.textContent = match.points ||  translations[selectedLanguage].no_point ; // Ensure points field exists or use default
+            pointsCell.setAttribute('data-label', 'Points');
 
-        const pointsCell = document.createElement('td');
-        pointsCell.textContent = match.points ||  translations[selectedLanguage].no_point ; // Ensure points field exists or use default
-        pointsCell.setAttribute('data-label', 'Points');
+            const dateCell = document.createElement('td');
+            dateCell.textContent = new Date(match.date).toLocaleDateString();
+            dateCell.setAttribute('data-label', 'Date');
 
-        const dateCell = document.createElement('td');
-        dateCell.textContent = new Date(match.date).toLocaleDateString();
-        dateCell.setAttribute('data-label', 'Date');
+            const resultCell = document.createElement('td');
+            resultCell.textContent = match.result.toLowerCase() === 'win' ? translations[selectedLanguage].win :  translations[selectedLanguage].lose;
+            resultCell.classList.add(match.result.toLowerCase() === 'win' ? 'result-win' : 'result-lose');
+            resultCell.setAttribute('data-label', 'Result');
 
-        const resultCell = document.createElement('td');
-        resultCell.textContent = match.result.toLowerCase() === 'win' ? translations[selectedLanguage].win :  translations[selectedLanguage].lose;
-        resultCell.classList.add(match.result.toLowerCase() === 'win' ? 'result-win' : 'result-lose');
-        resultCell.setAttribute('data-label', 'Result');
+            row.appendChild(playerCell);
+            row.appendChild(pointsCell);
+            row.appendChild(dateCell);
+            row.appendChild(resultCell);
 
-        row.appendChild(playerCell);
-        row.appendChild(pointsCell);
-        row.appendChild(dateCell);
-        row.appendChild(resultCell);
-
-        tableBody.appendChild(row);
-    });
+            tableBody.appendChild(row);
+        });   
+    }
 }
 

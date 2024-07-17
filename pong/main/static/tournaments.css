@@ -85,8 +85,7 @@ body {
     text-transform: uppercase;
     align-items: center;
     text-align: center;
-    border-radius: 25px;
-    border: 2px solid white;
+    border-radius: 5px;
 }
   
 .menu a {
@@ -98,12 +97,13 @@ body {
     margin-top: 0;
     text-align: center;
     font-size: medium;
-    border-radius: 25px;
+    border-radius: 5px;
+    margin: 0;
 }
   
 .menu a:hover {
     background-color: rgba(205, 213, 204, 0.788);
-    border-radius: 25px;
+    border-radius: 5px;
     transform: scale(1.0);
 }
   
@@ -111,9 +111,10 @@ body {
     color: #053527; 
 }
   
-.menu a.logout:hover {
+.menu a.logout {
     color: #960000;
 }
+
   
 .container {
     max-width: 700px;
@@ -263,7 +264,7 @@ body {
 }
 
 .join-tournament-button:hover, .start-tournament-button:hover {
-    background-color: #164b31;
+    background-color: #db7939;
 }
 
 .tournament-users {
@@ -316,7 +317,7 @@ body {
 }
 
 .modal-content {
-    background-color: rgb(58, 75, 70);
+    background-color: rgb(58 65 75);
     margin: 5% auto;
     padding: 40px;
     border-radius: 8px;
@@ -349,7 +350,6 @@ input[type="password"] {
     display: inline-block;
     border: 1px solid white;
     border-radius: 8px;
-    background-color: rgb(22, 22, 22);
     cursor: pointer;
     font-weight: 500;
     color: white;

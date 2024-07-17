@@ -3,17 +3,6 @@ body {
     padding: 0;
 font-family: Arial, sans-serif;
 background: linear-gradient(to right, #283048, #859398);
-    radial-gradient(
-        50% 50%at 50% 50%,
-        #1e6a45,
-        rgba(68, 118, 103, 0.04),
-        rgba(1, 10, 7, 0.88) 0.01%,
-        #7fd883 0.02%,
-        #053527 0.03%,
-        #549158 0.04%,
-        #17523b,
-        #124a35
-    );
     color: #fff;
     display: flex;
     justify-content: center;

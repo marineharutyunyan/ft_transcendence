@@ -211,13 +211,7 @@ async function hashPassword(password) {
         }
     }
 }
-var twoFaEnabled = document.querySelector('.toggle-switch input').checked;
 
-// document.getElementById('2fabutton').addEventListener('click', function(e) 
-// {
-//     console.log('2FA button clicked');
-//     console.log(twoFaEnabled)
-// });
 
 
 // Save changes
@@ -228,16 +222,23 @@ document.getElementById('saveChangesBtn').addEventListener('click', async functi
     var userEmail = document.getElementById('userEmail1').value;
     var userPassword = document.getElementById('userPassword1').value;
     const hashedPassword = await hashPassword(userPassword);
-    document.getElementById('userPassword1').value = userPassword;
-    console.log(twoFaEnabled)
-
     
-    var requestData = {
-        name: profileName,
-        username: userName,
-        email: userEmail,
-        password: hashedPassword,
-    };
+    var requestData = {};
+    if (profileName.trim() !== "") {
+        requestData.name = profileName;
+    }
+
+    if (userName.trim() !== "") {
+        requestData.username = userName;
+    }
+
+    if (userEmail.trim() !== "") {
+        requestData.email = userEmail;
+    }
+
+    if (userPassword.trim() !== "") {
+        requestData.password = hashedPassword;
+    }
 
     console.log(requestData);
     const token = localStorage.getItem('access');
