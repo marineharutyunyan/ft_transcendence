@@ -144,6 +144,7 @@ document.getElementById('removeProfileBtn').addEventListener('click', function()
         console.log(data.image);
         localStorage.setItem('default_image', data.image);
         alert('Profile picture removed successfully!');
+        window.location.href = `http://10.12.11.2:8000/settings/`;
     })
     .catch(error => {
         console.error('There was a problem with the fetch operation:', error);
@@ -545,6 +546,10 @@ function applyLanguage() {
                 "userName":"Edit Profile Username",
                 "userEmail":"Edit Profile Email",
                 "userPassword":"Change Password",
+                "profileName1":"Edit Profile Name",
+                "userName1":"Edit Profile Username",
+                "userEmail1":"Edit Profile Email",
+                "userPassword1":"Change Password",
                 "deleteAccountBtn":"Delete Account",
                 "saveChangesBtn":"Save Changes"
             },
@@ -558,6 +563,10 @@ function applyLanguage() {
                 "userName":"Խմբագրել պրոֆիլի օգտանունը",
                 "userEmail":"Խմբագրել պրոֆիլի էլ հասցեն",
                 "userPassword":"Փոխել գաղտնաբառը",
+                "profileName1":"Խմբագրել պրոֆիլի անունը",
+                "userName1":"Խմբագրել պրոֆիլի օգտանունը",
+                "userEmail1":"Խմբագրել պրոֆիլի էլ հասցեն",
+                "userPassword1":"Փոխել գաղտնաբառը",
                 "deleteAccountBtn":"Հաշիվը ջնջել",
                 "saveChangesBtn":"Պահպանել փոփոխությունները"
             },
@@ -571,6 +580,10 @@ function applyLanguage() {
                 "userName":"Изменить имя пользователя профиля",
                 "userEmail":"Изменить адрес эл. почты профиля",
                 "userPassword":"Изменить пароль",
+                "profileName1":"Изменить имя профиля",
+                "userName1":"Изменить имя пользователя профиля",
+                "userEmail1":"Изменить адрес эл. почты профиля",
+                "userPassword1":"Изменить пароль",
                 "deleteAccountBtn":"Удалить аккаунт",
                 "saveChangesBtn":"Сохранить изменения"
             },
@@ -584,10 +597,22 @@ function applyLanguage() {
                 "userName":"編輯個人資料用戶名",
                 "userEmail":"編輯個人資料電子郵件",
                 "userPassword":"更改密碼",
+                "profileName1":"編輯個人資料名稱",
+                "userName1":"編輯個人資料用戶名",
+                "userEmail1":"編輯個人資料電子郵件",
+                "userPassword1":"更改密碼",
                 "deleteAccountBtn":"刪除帳戶",
                 "saveChangesBtn":"儲存變更"
             },
     };
+
+
+
+    document.getElementById('userName1').placeholder = translations[selectedLanguage].userName1;
+    document.getElementById('userEmail1').placeholder = translations[selectedLanguage].userEmail1;
+    document.getElementById('userPassword1').placeholder = translations[selectedLanguage].userPassword1;
+    document.getElementById('profileName1').placeholder = translations[selectedLanguage].profileName1;
+
 
     const elementsToTranslate = {
         'homeheader':'homeheader',

@@ -98,7 +98,7 @@ def home(request):
 def language(request, id):
     if request.method == 'PUT':
         try:
-            player = Player.objects.get(id=id)
+            player = Player.objects.get(user_id=id)
             if player is None:
                 return JsonResponse({'error': 'Invalid credentials'}, status=400)
             data = {
@@ -119,7 +119,7 @@ def profile_info(request, id):
             user = User.objects.get(id=id)
             if user is None:
                 return JsonResponse({'error': 'Invalid credentials'}, status=400)
-            player = Player.objects.get(id=id)
+            player = Player.objects.get(user_id=id)
             if player is None:
                 return JsonResponse({'error': 'Invalid credentials'}, status=400)
             data = {
@@ -145,7 +145,7 @@ def history(request, id):
         except User.DoesNotExist:
             return JsonResponse({'error': 'User not found'}, status=404)
         try:
-            player = Player.objects.get(id=id)
+            player = Player.objects.get(user_id=id)
         except Player.DoesNotExist:
             return JsonResponse({'error': 'Player not found'}, status=404)
 
@@ -193,8 +193,8 @@ def change_settings(request, id):
     if request.method == 'PUT':
             # Get the email from the JSON data
             data = json.loads(request.body)
-            user = User.objects.get(id = id)
-            player = Player.objects.get(id = id)
+            user = User.objects.get(id=id)
+            player = Player.objects.get(user_id=id)
             # get data and send to User model
             name = data.get('name')
             if name == '' or name is None:
