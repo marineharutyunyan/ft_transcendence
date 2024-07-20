@@ -52,7 +52,7 @@ def home(request):
             History.objects.create(
                 player=Player.objects.get(user=round1),
                 opponent=Player.objects.get(user=round2),
-                points=10, game_mode='1v1', result='win'
+                points=1, game_mode='1v1', result='win'
                 )
             History.objects.create(
                 player=Player.objects.get(user=round2),
@@ -69,7 +69,7 @@ def home(request):
             History.objects.create(
                 player=Player.objects.get(user=round2),
                 opponent=Player.objects.get(user=round1),
-                points=10, game_mode='1v1', result='win'
+                points=1, game_mode='1v1', result='win'
                 )
             History.objects.create(
                 player=Player.objects.get(user=round1),
@@ -194,37 +194,39 @@ def change_settings(request, id):
             # Get the email from the JSON data
             data = json.loads(request.body)
             user = User.objects.get(id=id)
-            player = Player.objects.get(user_id=id)
+            # player = Player.objects.get(user_id=id)
             # get data and send to User model
-            name = data.get('name')
-            if name == '' or name is None:
-                name = user.first_name
-            username = data.get('username')
-            if username == '' or username is None:
-                username = user.username
-            email = data.get('email')
-            if email == '' or email is None:
-                email = user.email
-            pass1 = data.get('password')
-            if pass1 == '' or pass1 is None:
-                pass1 = user.password
-            image = data.get('image')
-            if image == '' or image is None:
-                image = player.image
-            try:
-                if user is not None:
-                    user.first_name = name
-                    user.username = username
-                    user.email = email
-                    user.password = pass1
-                    player.image = image
-                    user.save()
-                    player.save()
-                    return JsonResponse({'message': 'Change successful'}, status=200)
-                else:
+            desired_domain = "student.42yerevan.am"
+            if "@" in user.email:
+                domain_part = user.email.split("@")[1]
+            if domain_part != desired_domain:
+                name = data.get('name')
+                if name == '' or name is None:
+                    name = user.first_name
+                username = data.get('username')
+                if username == '' or username is None:
+                    username = user.username
+                email = data.get('email')
+                if email == '' or email is None:
+                    email = user.email
+                pass1 = data.get('password')
+                if pass1 == '' or pass1 is None:
+                    pass1 = user.password
+                try:
+                    if user is not None:
+                        user.first_name = name
+                        user.username = username
+                        user.email = email
+                        user.password = pass1
+                        user.save()                        
+                        return JsonResponse({'message': 'Change successful'}, status=200)
+                    else:
+                        return JsonResponse({'error': 'Invalid credentials'}, status=400)
+                except User.DoesNotExist:
                     return JsonResponse({'error': 'Invalid credentials'}, status=400)
-            except User.DoesNotExist:
-                return JsonResponse({'error': 'Invalid credentials'}, status=400)
+            else:
+                print("✅ intra user")
+                return JsonResponse({'error': 'Intra users are not allowed to change any credentials'}, status=400)
     return render(request, 'main/settings.html')
 
 @csrf_exempt

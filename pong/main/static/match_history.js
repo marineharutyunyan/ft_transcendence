@@ -123,10 +123,10 @@ document.addEventListener("DOMContentLoaded", function() {
 function populateTable(data) {
     const table = document.getElementById('matchHistoryTable');
 
-    if(data.length === 0)
+    if(data && data.length === 0)
         table.style.display = 'none'; 
     else {
-        element.style.display = 'table';
+        table.style.display = 'table';
         var translations = {
         "en": {
             "no_point": "N/A",

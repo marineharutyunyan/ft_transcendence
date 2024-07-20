@@ -268,9 +268,6 @@ document.getElementById('saveChangesBtn').addEventListener('click', async functi
         body: JSON.stringify(requestData)
     })
     .then(response => {
-        if (!response.ok) {
-            throw new Error('Network response was not ok');
-        }
         if (response.status === 200)
         {
             alert('Changes saved successfully!');
@@ -279,10 +276,10 @@ document.getElementById('saveChangesBtn').addEventListener('click', async functi
         return response.json();
     })
     .then(data => {
+        if (data.error) {
+            alert(data.error);
+        }
         console.log(data);
-    })
-    .catch(error => {
-        console.error('There was a problem with the fetch operation:', error);
     });
 });
 

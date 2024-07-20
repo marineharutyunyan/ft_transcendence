@@ -23,7 +23,7 @@ document.addEventListener("DOMContentLoaded", function() {
 document.getElementById('Tournament').style.display = "block";
 
 var profilePic = localStorage.getItem('profilePic');
-document.getElementById('profileImage').src = profilePic || 'profile.jpg';
+document.getElementById('profileImage').src = profilePic || 'default_user.jpg';
 
 function showJoinForm() {
     document.getElementById('joinFormModal').style.display = 'block';
